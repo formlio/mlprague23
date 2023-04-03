@@ -1,0 +1,42 @@
+[RUNNER]
+default = "dask"
+
+[RUNNER.dask]
+provider = "dask"
+#scheduler-address = "127.0.0.1:8786"
+#scheduler = "distributed"
+scheduler = "processes"
+#scheduler = "threads"
+#scheduler = "synchronous"
+
+[RUNNER.graphviz]
+provider = "graphviz"
+view = false
+
+[REGISTRY]
+default = "tutorial"
+
+[REGISTRY.tutorial]
+provider = "posix"
+path = "/opt/forml/assets/registry"
+
+[INVENTORY]
+default = "tutorial"
+
+[INVENTORY.tutorial]
+provider = "posix"
+path = "/opt/forml/assets/inventory"
+
+[FEED]
+default = ["openlake", "dummy"]
+
+[FEED.openlake]
+provider = "openlake:Lite"
+
+[FEED.dummy]
+provider = "monolite"
+[FEED.dummy.inline]
+"tutorial:Dummy" = [
+    ["alpha", 27, 0.314, 2021-05-11T17:12:24],
+    ["beta", 11, -1.12, 2020-11-03T01:24:56],
+]

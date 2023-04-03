@@ -1,0 +1,8 @@
+.cache
+*.dot
+*.dot.*
+.idea
+.ipynb_checkpoints
+*.log
+*.log.?
+.vscode
