@@ -3,6 +3,7 @@ Reproducible, Portable, and Distributable ML Solutions in Python
 
 When achieved, the combination of reproducibility, portability, and distributability in ML
 solutions constitutes a powerful faculty unlocking a number of operational opportunities.
+
 While reproducibility is a well-established pathway for conducting scientific research, it is not
 always receiving the same recognition within the data product industry. Similarly, portability
 and distributability are typically regarded as irrelevant for bespoke solutions and only
@@ -12,9 +13,11 @@ achieved without much extra effort. In return, this brings significant benefits 
 highly collaborative R&D, inherent lifecycle management, effective model troubleshooting,
 carefree and flexible deployment (latency/throughput-optimal runtime modes), and even
 potential commoditization (market of turnkey solutions).
+
 In this workshop, we will dive deeper into these concepts examining carefully the available
 technologies and reviewing some of the existing tools. A significant amount of the time will
-be spent working with the [ForML](http://forml.io/) framework implementing a practical end-to-end ML solution demonstrating all of these declared principles.
+be spent working with the [ForML](http://forml.io/) framework implementing a practical end-to-end
+ML solution demonstrating all of these declared principles.
 
 [MLPrague](https://www.mlprague.com/) 2023 Workshop
 
@@ -28,8 +31,7 @@ Clone this repository:
     $ cd mlprague23
 
 
-Docker
-^^^^^^
+### Docker
 
 The recommended way to save time during this workshop is to perform all the
 steps in the pre-built Docker container.
@@ -38,20 +40,19 @@ steps in the pre-built Docker container.
    the [Docker Compose plugin](https://docs.docker.com/compose/install/).
 2. Edit the [`.env`](.env) file and supply your local `UID` and `GID` numbers.
 
-  * Use the `id` (or `id -u` and `id -g` respectively) on Mac/Linux to find out
-    your UID/GID.
+   * Use the `id` (or `id -u` and `id -g` respectively) on Mac/Linux to find out
+     your UID/GID.
 
 3. Spin up the workspace container from within the `mlprague23` project root
    directory:
 
-    $ docker compose up
+       $ docker compose up
 
 4. Load the [workspace notebook interface](http://127.0.0.1:8888/lab) using
    your browser.
 
 
-From Scratch
-^^^^^^^^^^^^
+### From Scratch
 
 The following procedure can be followed to setup the environment without Docker.
 It is, however, not recommended due to the limitted time during the workshop.
