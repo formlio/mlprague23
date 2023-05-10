@@ -38,17 +38,12 @@ steps in the pre-built Docker container.
 
 1. [Install Docker Engine](https://docs.docker.com/engine/install/) along with
    the [Docker Compose plugin](https://docs.docker.com/compose/install/).
-2. Edit the [`.env`](.env) file and supply your local `UID` and `GID` numbers.
-
-   * Use the `id` (or `id -u` and `id -g` respectively) on Mac/Linux to find out
-     your UID/GID.
-
-3. Spin up the workspace container from within the `mlprague23` project root
+2. Spin up the workspace container from within the `mlprague23` project root
    directory:
 
        $ docker compose up
 
-4. Load the [workspace notebook interface](http://127.0.0.1:8888/lab) using
+3. Load the [workspace notebook interface](http://127.0.0.1:8888/lab) using
    your browser.
 
 

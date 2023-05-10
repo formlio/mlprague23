@@ -6,8 +6,7 @@ services:
     image: ghcr.io/formlio/mlprague23:latest
     hostname: workspace
     environment:
-      FORML_UID: "$UID"
-      FORML_GID: "$GID"
+      IDREF: /opt/forml/config.toml
     command:
       - jupyter
       - lab
