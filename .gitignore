@@ -6,4 +6,6 @@
 *.log
 *.log.?
 .vscode
+__pycache__
+2-tutorial/tutorial.py
 3-solution/forml-solution-avazuctr/
