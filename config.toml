@@ -3,11 +3,11 @@ default = "dask"
 
 [RUNNER.dask]
 provider = "dask"
-#scheduler-address = "127.0.0.1:8786"
-#scheduler = "distributed"
 scheduler = "processes"
-#scheduler = "threads"
-#scheduler = "synchronous"
+
+[RUNNER.spark]
+provider = "spark"
+"spark.driver.memory" = "4g"
 
 [RUNNER.graphviz]
 provider = "graphviz"

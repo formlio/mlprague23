@@ -41,7 +41,7 @@ steps in the pre-built Docker container.
 2. Spin up the workspace container from within the `mlprague23` project root
    directory:
 
-       $ docker compose up
+       $ docker compose up -d
 
 3. Load the [workspace notebook interface](http://127.0.0.1:8888/lab) using
    your browser.
