@@ -20,8 +20,8 @@ services:
     - ./2-tutorial:/opt/forml/workspace/2-tutorial
     - ./3-solution:/opt/forml/workspace/3-solution
     - ./workspace.json:/opt/forml/.jupyter/lab/workspaces/default-37a8.jupyterlab-workspace:ro
-    - ./tutorial.py:/opt/forml/tutorial.py:ro
-    - ./tutorial.py:/opt/forml/workspace/2-tutorial/tutorial.py:ro
+    - ./dummycatalog.py:/opt/forml/dummycatalog.py:ro
+    - ./dummycatalog.py:/opt/forml/workspace/2-tutorial/dummycatalog.py:ro
     - assets:/opt/forml/assets
     ports:
     - "8888:8888"  # Jupyter

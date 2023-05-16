@@ -1,5 +1,5 @@
 """
-This is a FooBar schema catalog used throughout the ForML tutorial.
+This is a FooBarBaz schema catalog used throughout the ForML tutorial.
 """
 from forml.io import dsl
 

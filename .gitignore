@@ -7,5 +7,5 @@
 *.log.?
 .vscode
 __pycache__
-2-tutorial/tutorial.py
+2-tutorial/dummycatalog.py
 3-solution/forml-solution-avazuctr/
