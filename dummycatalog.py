@@ -9,7 +9,7 @@ class Foo(dsl.Schema):
 
     Timestamp = dsl.Field(dsl.Timestamp())
     Label = dsl.Field(dsl.Integer())
-    Code = dsl.Field(dsl.String())
+    Level = dsl.Field(dsl.String())
     Value = dsl.Field(dsl.Float())
     Bar = dsl.Field(dsl.Integer())
 
