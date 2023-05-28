@@ -7,7 +7,7 @@ scheduler = "processes"
 
 [RUNNER.spark]
 provider = "spark"
-"spark.driver.memory" = "4g"
+"spark.driver.memory" = "6g"
 
 [RUNNER.graphviz]
 provider = "graphviz"
