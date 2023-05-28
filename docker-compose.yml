@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  workspace:
+    container_name: workspace
+    image: ghcr.io/formlio/mlprague23:latest
+    hostname: workspace
+    environment:
+      IDREF: /opt/forml/config.toml
+    command:
+      - jupyter
+      - lab
+      - --port=8888
+      - --no-browser
+      - --notebook-dir=/opt/forml/workspace
+    volumes:
+    - ./config.toml:/opt/forml/config.toml
+    - ./index.ipynb:/opt/forml/workspace/index.ipynb
+    - ./2-tutorial:/opt/forml/workspace/2-tutorial
+    - ./3-solution:/opt/forml/workspace/3-solution
+    - ./workspace.json:/opt/forml/.jupyter/lab/workspaces/default-37a8.jupyterlab-workspace:ro
+    - ./dummycatalog.py:/opt/forml/dummycatalog.py:ro
+    - ./dummycatalog.py:/opt/forml/workspace/2-tutorial/dummycatalog.py:ro
+    ports:
+    - "8888:8888"  # Jupyter
+    - "8000:8000"  # ForML Rest Gateway
+    - "4040:4040"  # Spark UI
+    working_dir: /opt/forml/workspace
+    restart: unless-stopped
+

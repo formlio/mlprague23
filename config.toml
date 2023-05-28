@@ -1,0 +1,68 @@
+[RUNNER]
+default = "dask"
+
+[RUNNER.dask]
+provider = "dask"
+scheduler = "processes"
+
+[RUNNER.spark]
+provider = "spark"
+"spark.driver.memory" = "6g"
+
+[RUNNER.graphviz]
+provider = "graphviz"
+view = false
+
+[REGISTRY]
+default = "tutorial"
+
+[REGISTRY.tutorial]
+provider = "posix"
+path = "/opt/forml/assets/registry"
+
+[INVENTORY]
+default = "tutorial"
+
+[INVENTORY.tutorial]
+provider = "posix"
+path = "/opt/forml/assets/inventory"
+
+[FEED]
+default = ["openlake", "dummy"]
+
+[FEED.openlake]
+provider = "openlake:Lite"
+
+[FEED.dummy]
+provider = "monolite"
+[FEED.dummy.inline]
+"dummycatalog:Foo" = [
+    [2021-05-05T03:12:19, 1, "Alpha", 0.26, 1],
+    [2021-05-11T11:27:50, 0, "Tango", 0.94, 3],
+    [2021-05-11T17:35:27, 0, "Zulu", 0.57, 4],
+    [2021-05-06T19:49:43, 0, "Uniform", 0.69, 2],
+    [2021-05-12T08:53:35, 0, "Xray", 0.83, 5],
+    [2021-05-12T22:06:04, 0, "Victor", 0.61, 6],
+    [2021-05-07T13:17:43, 1, "Echo", 0.12, 1],
+    [2021-05-13T16:25:18, 0, "Whiskey", 0.78, 3],
+    [2021-05-13T06:31:58, 0, "November", 0.92, 4],
+    [2021-05-08T15:48:20, 0, "Yankee", 0.68, 5],
+    [2021-05-14T19:56:01, 1, "Charlie", 0.35, 2],
+    [2021-05-14T04:03:32, 0, "Mike", 0.54, 6],
+    [2021-05-09T01:18:13, 1, "Bravo", 0.07, 1],
+    [2021-05-15T19:24:46, 0, "Romeo", 0.58, 3],
+    [2021-05-15T21:31:22, 0, "Oscar", 0.84, 4],
+    [2021-05-16T23:48:57, 0, "Quebec", 0.74, 5],
+    [2021-05-16T00:56:39, 1, "Foxtrot", 0.45, 2],
+    [2021-05-10T16:06:06, 0, "Papa", 0.59, 6],
+    [2021-05-17T14:17:43, 1, "Delta", 0.33, 1],
+    [2021-05-17T06:52:51, 0, "Siera", 0.72, 6],
+]
+"dummycatalog:Bar" = [
+    [6, 0.41, "violet"],
+    [3, 0.58, "yellow"],
+    [5, 0.47, "blue"],
+    [2, 0.61, "orange"],
+    [1, 0.69, "red"],
+    [4, 0.53, "green"],
+]
