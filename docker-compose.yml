@@ -25,7 +25,7 @@ services:
     - assets:/opt/forml/assets
     ports:
     - "8888:8888"  # Jupyter
-    - "8080:8080"  # ForML Rest Gateway
+    - "8000:8000"  # ForML Rest Gateway
     - "4040:4040"  # Spark UI
     working_dir: /opt/forml/workspace
     restart: unless-stopped
