@@ -15401,7 +15401,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="kn">from</span> <span class="nn">dummycatalog</span> <span class="kn">import</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span>
 
 <span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span>   <span class="c1"># Minimal query statement refering to dummycatalog </span>
-<span class="n">PIPELINE</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">ToPandas</span><span class="p">()</span>  <span class="c1"># Minimal pipeline a single operator</span>
+<span class="n">PIPELINE</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">ToPandas</span><span class="p">()</span>  <span class="c1"># Minimal pipeline - a single operator</span>
 <span class="n">PROJECT</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span>
 <span class="n">PROJECT</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>  <span class="c1"># Triggering the launcher</span>
 </pre></div>
