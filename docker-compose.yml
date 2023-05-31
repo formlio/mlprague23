@@ -15,9 +15,8 @@ services:
       - --notebook-dir=/opt/forml/workspace
     volumes:
     - ./config.toml:/opt/forml/config.toml
-    - ./0-index.ipynb:/opt/forml/workspace/0-index.ipynb
-    - ./0-index.slides.html:/opt/forml/workspace/0-index.slides.html
-    - ./1-intro:/opt/forml/workspace/1-intro
+    - ./index.ipynb:/opt/forml/workspace/index.ipynb
+    - ./index.html:/opt/forml/workspace/index.html
     - ./2-tutorial:/opt/forml/workspace/2-tutorial
     - ./3-solution:/opt/forml/workspace/3-solution
     - ./workspace.json:/opt/forml/.jupyter/lab/workspaces/default-37a8.jupyterlab-workspace:ro

@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>4-project-management slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>1-setup-and-exploration slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -15166,93 +15166,55 @@ div.jp-OutputPrompt {
 
 <div class="reveal">
 <div class="slides"><section ><section >
-<div id="cell-id=e99c9d5b-7558-4a55-b4d9-b07797976eba" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=faef8aa9-712a-4b85-bcb5-92d56397e52f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Project-Resources-Management">Project Resources Management<a class="anchor-link" href="#Project-Resources-Management">&#182;</a></h1><p>Objective:</p>
-<blockquote>
-<p>Learning how ML solutions and their lifecycles can be managed as software projects.</p>
-</blockquote>
-<p>Principles:</p>
-<ol>
-<li>Project resources are organized to facilitate development, collaboration and maintainability.</li>
-<li><strong>Development lifecycle</strong> handles all the project development phases leading to a model release.</li>
-<li><strong>Model registry</strong> represents the persistence layer holding the published project artifacts at rest.</li>
-<li><strong>Production lifecycle</strong> takes care of all the necessary model operations after its release.</li>
-</ol>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
-<div id="cell-id=dfdbaead-2b0a-47b1-8ef4-40108ea8a2e2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Project-Setup">Project Setup<a class="anchor-link" href="#Project-Setup">&#182;</a></h2><p>ForML based solutions are standard Python projects typically with <a href="https://docs.forml.io/en/latest/project.html">the following minimal structure</a>:</p>
-<table>
-<thead>
-<tr>
-  <th>Component</th>
-  <th>Location</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Project Descriptor</td>
-  <td><code>pyproject.toml</code></td>
-</tr>
-<tr>
-  <td>Dependencies</td>
-  <td><code>pyproject.toml</code></td>
-</tr>
-<tr>
-  <td>Data Requirements</td>
-  <td><code>&lt;module&gt;/source.py</code></td>
-</tr>
-<tr>
-  <td>Evaluation Spec</td>
-  <td><code>&lt;module&gt;/evaluation.py</code></td>
-</tr>
-<tr>
-  <td>Model Pipeline</td>
-  <td><code>&lt;module&gt;/pipeline.py</code></td>
-</tr>
-<tr>
-  <td>Tests</td>
-  <td><code>tests/</code></td>
-</tr>
-</tbody>
-</table>
-<p>Additional typical components not used directly by ForML (see for example <a href="https://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Datascience</a>):</p>
-<ul>
-<li><code>data/</code></li>
-<li><code>docs/</code></li>
-<li><code>notebooks/</code></li>
-<li>CI/CD descriptors</li>
+<h1 id="CTR-Prediction-Solution">CTR Prediction Solution<a class="anchor-link" href="#CTR-Prediction-Solution">&#182;</a></h1><ul>
+<li><a href="https://www.kaggle.com/c/avazu-ctr-prediction">Avazu CTR Prediction</a> dataset from the 2014 Kaggle competition</li>
+<li>11 days of anonymized bid requests, 24 columns - timestamp, click, slot properties, device properties, C?? attributes</li>
+<li>we are going to use a subset of 500.000 requests (pre-cached for our exact queries - otherwise needs credentials)</li>
+<li>this is only a couple of hours of data - not even a full day (the model won't be able to properly capture temporal features)</li>
+<li>not doing datascience</li>
+<li>using <a href="https://openschema.readthedocs.io/en/latest/_auto/_auto/openschema.kaggle.Avazu.html">Openschema catalog</a></li>
 </ul>
 
 </div>
 </div>
 </div>
 </div></section></section><section ><section >
-<div id="cell-id=3f4c9ff7-4e07-4f68-8e05-1729823a1323" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=37843cad-1342-4a36-94ae-dbac555d4083" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Starting-a-New-Project">Starting a New Project<a class="anchor-link" href="#Starting-a-New-Project">&#182;</a></h3><p>For the sake of this tutorial, let's start a new project called <code>dummy</code>:</p>
+<h2 id="Project-Setup">Project Setup<a class="anchor-link" href="#Project-Setup">&#182;</a></h2><p>Let's start by setting up the project skeleton and the main components.</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=595d86e8-c2de-4103-b79e-182975a4d44b" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div id="cell-id=4704aa20-8f59-4b93-a0e4-a6435998a79f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Starting-New-Project">Starting New Project<a class="anchor-link" href="#Starting-New-Project">&#182;</a></h3><p>We are going to initialize new ForML project with the following parameters:</p>
+<ul>
+<li>the project name will be <code>forml-solution-avazuctr</code></li>
+<li>but we want the Python package to be called just <code>avazuctr</code></li>
+<li>setting the initial project version to <code>0.1</code></li>
+<li>anticipated dependency requirements are <code>openschema</code> and <code>pandas</code></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=060c3051-eef1-4d12-aebe-089c8b2bc2a5" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15260,7 +15222,10 @@ div.jp-OutputPrompt {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>init<span class="w"> </span>dummy
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>init<span class="w"> </span><span class="s2">&quot;forml-solution-avazuctr&quot;</span><span class="w"> </span><span class="err">\</span>
+    <span class="o">--</span><span class="n">version</span> <span class="s2">&quot;0.1&quot;</span> \
+    <span class="o">--</span><span class="n">package</span> <span class="s2">&quot;avazuctr&quot;</span> \
+    <span class="o">--</span><span class="n">requirements</span><span class="o">=</span><span class="s2">&quot;openschema==0.7,pandas==2.0.1&quot;</span>
 </pre></div>
 
      </div>
@@ -15268,7 +15233,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 
-</div><div id="cell-id=9b3d8217-410e-4e04-8f2d-cc6fb6eeac5a" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section ><div id="cell-id=60374d96-607b-49d9-bcad-2d5a6cc5f50b" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15276,7 +15241,7 @@ div.jp-OutputPrompt {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> dummy
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>tree<span class="w"> </span>forml-solution-avazuctr
 </pre></div>
 
      </div>
@@ -15296,45 +15261,8 @@ div.jp-OutputPrompt {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>/opt/forml/workspace/2-tutorial/dummy
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div id="cell-id=a3be25f9-7b65-4030-8e08-e63a5e0a8200" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>tree<span class="w"> </span>.
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre><span class="ansi-blue-intense-fg ansi-bold">.</span>
-├── <span class="ansi-blue-intense-fg ansi-bold">dummy</span>
+<pre><span class="ansi-blue-intense-fg ansi-bold">forml-solution-avazuctr</span>
+├── <span class="ansi-blue-intense-fg ansi-bold">avazuctr</span>
 │   ├── __init__.py
 │   ├── evaluation.py
 │   ├── pipeline.py
@@ -15352,28 +15280,15 @@ div.jp-OutputPrompt {
 
 </div>
 
-</div></section><section >
-<div id="cell-id=74c4b98a-a660-4a6c-a69c-fda3d424b6f8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>ForML is adopting the standard Python <code>pyproject.toml</code> descriptor:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=2ad5aadf-ab76-4be4-b10e-5431d8b1c3cc" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=deea2de2-c614-4417-979e-3725ab9a0f0a" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="n">display</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="s1">&#39;pyproject.toml&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> forml-solution-avazuctr
 </pre></div>
 
      </div>
@@ -15387,102 +15302,15 @@ div.jp-OutputPrompt {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputArea-child">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<style>pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.output_html .hll { background-color: #ffffcc }
-.output_html { background: #f8f8f8; }
-.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
-.output_html .err { border: 1px solid #FF0000 } /* Error */
-.output_html .k { color: #008000; font-weight: bold } /* Keyword */
-.output_html .o { color: #666666 } /* Operator */
-.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
-.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
-.output_html .cp { color: #9C6500 } /* Comment.Preproc */
-.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
-.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
-.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
-.output_html .gd { color: #A00000 } /* Generic.Deleted */
-.output_html .ge { font-style: italic } /* Generic.Emph */
-.output_html .gr { color: #E40000 } /* Generic.Error */
-.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.output_html .gi { color: #008400 } /* Generic.Inserted */
-.output_html .go { color: #717171 } /* Generic.Output */
-.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.output_html .gs { font-weight: bold } /* Generic.Strong */
-.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.output_html .gt { color: #0044DD } /* Generic.Traceback */
-.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.output_html .kp { color: #008000 } /* Keyword.Pseudo */
-.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.output_html .kt { color: #B00040 } /* Keyword.Type */
-.output_html .m { color: #666666 } /* Literal.Number */
-.output_html .s { color: #BA2121 } /* Literal.String */
-.output_html .na { color: #687822 } /* Name.Attribute */
-.output_html .nb { color: #008000 } /* Name.Builtin */
-.output_html .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.output_html .no { color: #880000 } /* Name.Constant */
-.output_html .nd { color: #AA22FF } /* Name.Decorator */
-.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
-.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
-.output_html .nf { color: #0000FF } /* Name.Function */
-.output_html .nl { color: #767600 } /* Name.Label */
-.output_html .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.output_html .nv { color: #19177C } /* Name.Variable */
-.output_html .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.output_html .w { color: #bbbbbb } /* Text.Whitespace */
-.output_html .mb { color: #666666 } /* Literal.Number.Bin */
-.output_html .mf { color: #666666 } /* Literal.Number.Float */
-.output_html .mh { color: #666666 } /* Literal.Number.Hex */
-.output_html .mi { color: #666666 } /* Literal.Number.Integer */
-.output_html .mo { color: #666666 } /* Literal.Number.Oct */
-.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
-.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
-.output_html .sc { color: #BA2121 } /* Literal.String.Char */
-.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
-.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
-.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
-.output_html .sx { color: #008000 } /* Literal.String.Other */
-.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
-.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
-.output_html .ss { color: #19177C } /* Literal.String.Symbol */
-.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.output_html .fm { color: #0000FF } /* Name.Function.Magic */
-.output_html .vc { color: #19177C } /* Name.Variable.Class */
-.output_html .vg { color: #19177C } /* Name.Variable.Global */
-.output_html .vi { color: #19177C } /* Name.Variable.Instance */
-.output_html .vm { color: #19177C } /* Name.Variable.Magic */
-.output_html .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="c1"># Dummy project.</span>
-<span class="c1">#</span>
-<span class="c1"># Generated on 2023-05-31 04:20:30.693934 by forml using ForML 0.93.</span>
-
-<span class="k">[project]</span>
-<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dummy&quot;</span>
-<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.1.dev1&quot;</span>
-<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="s">&quot;forml==0.93&quot;</span>
-<span class="p">]</span>
-
-
-<span class="k">[tool.forml]</span>
-<span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dummy&quot;</span>
-</pre></div>
-
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>/opt/forml/workspace/3-solution/forml-solution-avazuctr
+</pre>
+</div>
 </div>
 
 </div>
@@ -15490,25 +15318,23 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 
 </div>
-
-</div>
-<div id="cell-id=d17fa424-77d1-4895-b773-e7c13dd4afef" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=f94353f2-5e42-47dc-8aac-5e5162bf5c82" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's keep our <em>Dummy</em> project under version control:</p>
+<p>Going to keep the project under version control from the beginning:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=b942eb6a-6435-4c78-b23d-f2b02abcd980" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=1222da46-67c0-4753-8f60-e9398c3498f1" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>init<span class="w"> </span>.
@@ -15532,7 +15358,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Initialized empty Git repository in /opt/forml/workspace/2-tutorial/dummy/.git/
+<pre>Initialized empty Git repository in /opt/forml/workspace/3-solution/forml-solution-avazuctr/.git/
 </pre>
 </div>
 </div>
@@ -15542,48 +15368,138 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 
 </div></section></section><section ><section >
-<div id="cell-id=81643370-eb70-428f-b04a-4746f3d80ae4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=808904d6-5bc8-43f1-b797-d7435f3b6a50" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Filling-in-the-Project-Components">Filling-in the Project Components<a class="anchor-link" href="#Filling-in-the-Project-Components">&#182;</a></h3>
+<h3 id="Defining-Project-Source">Defining Project Source<a class="anchor-link" href="#Defining-Project-Source">&#182;</a></h3><p>We use the <a href="https://openschema.readthedocs.io/en/latest/_auto/_auto/openschema.kaggle.Avazu.html">Openschema catalog</a> to specify the data requirements.</p>
+<p>The schema contains the following set of fields (see the <a href="https://openschema.readthedocs.io/en/latest/_auto/_auto/openschema.kaggle.Avazu.html">schema page</a> for their descriptions):</p>
+
 </div>
 </div>
 </div>
+</div><div id="cell-id=c46d8c57-e2b1-4f01-81e2-570108d0a883" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div id="cell-id=2ed01d6c-55dd-48b4-a713-4c795a2dba16" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">openschema</span> <span class="kn">import</span> <span class="n">kaggle</span>
+
+<span class="nb">print</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">kaggle</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">schema</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[&#39;id&#39;, &#39;click&#39;, &#39;hour&#39;, &#39;C1&#39;, &#39;banner_pos&#39;, &#39;site_id&#39;, &#39;site_domain&#39;, &#39;site_category&#39;, &#39;app_id&#39;, &#39;app_domain&#39;, &#39;app_category&#39;, &#39;device_id&#39;, &#39;device_ip&#39;, &#39;device_model&#39;, &#39;device_type&#39;, &#39;device_conn_type&#39;, &#39;C14&#39;, &#39;C15&#39;, &#39;C16&#39;, &#39;C17&#39;, &#39;C18&#39;, &#39;C19&#39;, &#39;C20&#39;, &#39;C21&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section><section >
+<div id="cell-id=c3a1aa5f-fe18-440a-8605-36458fce7317" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Data-Requirements">Data Requirements<a class="anchor-link" href="#Data-Requirements">&#182;</a></h4><p>Let's define the <a href="dummy/dummy/source.py">dummy/source.py</a>:</p>
+<p>Let's define the <a href="forml-solution-avazuctr/avazuctr/source.py">avazuctr/source.py</a> by using this schema:</p>
 <ol>
-<li>Open the <a href="dummy/dummy/source.py">dummy/source.py</a> component.</li>
-<li>Update it with the final query DSL used previously in the chapter <a href="2-task-dependency-management.slides.html#Operators">2-task-dependency-management</a>:</li>
+<li>Open the <a href="forml-solution-avazuctr/avazuctr/source.py">avazuctr/source.py</a> component.</li>
+<li>Select the required <code>FEATURES</code> (excluding <code>id</code>, <code>device_ip</code>, and <code>device_id</code>):</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openschema</span> <span class="kn">import</span> <span class="n">kaggle</span> <span class="k">as</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
 <span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">payload</span>
 
-<span class="kn">from</span> <span class="nn">dummycatalog</span> <span class="kn">import</span> <span class="n">Foo</span>
+<span class="c1"># Listing the feature columns</span>
+<span class="n">FEATURES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C1</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">banner_pos</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">site_id</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">site_domain</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">site_category</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">app_id</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">app_domain</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">app_category</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">device_model</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">device_type</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">device_conn_type</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C14</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C15</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C16</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C17</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C18</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C19</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C20</span><span class="p">,</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">C21</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
 
-<span class="n">FEATURES</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">Level</span><span class="p">,</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Value</span><span class="p">)</span>
-<span class="n">OUTCOMES</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Label</span>
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=51746e56-92c7-457e-826b-053f13175b90" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="3">
+<li>Point <code>OUTCOMES</code> to <code>schema.Avazu.click</code>.</li>
+<li>For continuous data (timeseries) we also need to point ForML to the time dimension to allow for incremental processing - here the <code>schema.Avazu.hour</code>.</li>
+<li>Compose the source query with the familiar <code>payload.ToPandas</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">OUTCOMES</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">click</span>
+<span class="n">ORDINAL</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">hour</span>
 
-<span class="n">SOURCE</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">FEATURES</span><span class="p">,</span> <span class="n">OUTCOMES</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">payload</span><span class="o">.</span><span class="n">ToPandas</span><span class="p">()</span>
+<span class="n">STATEMENT</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">*</span><span class="n">FEATURES</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">orderby</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Avazu</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">500000</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># Setting up the source descriptor:</span>
+<span class="n">SOURCE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">,</span> <span class="n">OUTCOMES</span><span class="p">,</span> <span class="n">ordinal</span><span class="o">=</span><span class="n">ORDINAL</span><span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="n">payload</span><span class="o">.</span><span class="n">ToPandas</span><span class="p">()</span>
+<span class="p">)</span>
 
+<span class="c1"># Registering the descriptor</span>
 <span class="n">project</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">SOURCE</span><span class="p">)</span>
 </pre></div>
-<ol start="4">
-<li><strong>SAVE THE <a href="dummy/source.py">dummy/source.py</a> FILE!</strong></li>
+<ol start="6">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/avazuctr/source.py">avazuctr/source.py</a> FILE!</strong></li>
 </ol>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=35e3d97e-b61f-45d1-8281-e2765c584547" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=55a89b4a-9f9a-4be5-920b-d169855a7dce" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15591,7 +15507,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>dummy/source.py
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>avazuctr/source.py
 </pre></div>
 
      </div>
@@ -15599,42 +15515,38 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 
-</div></section><section >
-<div id="cell-id=8d75d18a-5faf-4f4d-822e-4997bfda5bf1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div></section></section><section ><section >
+<div id="cell-id=cbc4d974-b44f-4111-97aa-89c5434e800c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Evaluation">Evaluation<a class="anchor-link" href="#Evaluation">&#182;</a></h4><p>Let's configure the <a href="dummy/dummy/evaluation.py">dummy/evaluation.py</a>:</p>
+<h3 id="Defining-Evaluation-Metric">Defining Evaluation Metric<a class="anchor-link" href="#Defining-Evaluation-Metric">&#182;</a></h3><p>The generated <a href="forml-solution-avazuctr/avazuctr/evaluation.py">avazuctr/evaluation.py</a> contains some default evaluation logic (calculating accuracy using 20% holdout). Let's modify the file changing the metric to <code>logloss</code>:</p>
 <ol>
-<li>Open the <a href="dummy/dummy/evaluation.py">dummy/evaluation.py</a> component.</li>
-<li>Update it with the evaluation descriptor shown previously in the chapter <a href="3-evaluation.slides.html#Cross-validation-Method">3-evaluation</a>:</li>
+<li>Open the <a href="forml-solution-avazuctr/avazuctr/evaluation.py">avazuctr/evaluation.py</a> component.</li>
+<li>Update it with the code below specifying the <code>logloss</code> metric:</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">model_selection</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">evaluation</span><span class="p">,</span> <span class="n">project</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 
-<span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">evaluation</span><span class="p">,</span> <span class="n">project</span>
-
+<span class="c1"># Using LogLoss on a 20% holdout dataset:</span>
 <span class="n">EVALUATION</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">Evaluation</span><span class="p">(</span>
     <span class="n">evaluation</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">log_loss</span><span class="p">),</span>
-    <span class="n">evaluation</span><span class="o">.</span><span class="n">CrossVal</span><span class="p">(</span>
-        <span class="n">crossvalidator</span><span class="o">=</span><span class="n">model_selection</span><span class="o">.</span><span class="n">StratifiedKFold</span><span class="p">(</span>
-            <span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-        <span class="p">)</span>
-    <span class="p">),</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">HoldOut</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
 <span class="p">)</span>
 
+<span class="c1"># Registering the descriptor</span>
 <span class="n">project</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">EVALUATION</span><span class="p">)</span>
 </pre></div>
-<ol start="4">
-<li><strong>SAVE THE <a href="dummy/evaluation.py">dummy/evaluation.py</a> FILE!</strong></li>
+<ol start="3">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/avazuctr/evaluation.py">avazuctr/evaluation.py</a> FILE!</strong></li>
 </ol>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=b91806e8-1793-4df8-a221-bcd05e9b9ebf" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=c0e8eccc-b190-415a-95de-d37dee999eac" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15642,7 +15554,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>dummy/evaluation.py
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>avazuctr/evaluation.py
 </pre></div>
 
      </div>
@@ -15650,125 +15562,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 
-</div></section><section >
-<div id="cell-id=d2e64344-4c51-4f51-b2a5-1ad4149aeb97" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div></section></section><section ><section >
+<div id="cell-id=2dc797e8-daeb-4126-bb32-88f945caff02" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Pipeline">Pipeline<a class="anchor-link" href="#Pipeline">&#182;</a></h4><p>Let's setup all the <a href="dummy/dummy/pipeline.py">dummy/pipeline.py</a> workflow:</p>
-<ol>
-<li>Open the <a href="dummy/dummy/pipeline.py">dummy/pipeline.py</a> component.</li>
-<li>Update it with all the actors, operators and their composition as explored previously in the chapter <a href="2-task-dependency-management.slides.html">2-task-dependency-management</a>.</li>
-<li>Save the file!</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
-
-<span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">from</span> <span class="nn">imblearn</span> <span class="kn">import</span> <span class="n">over_sampling</span>
-
-<span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span><span class="p">,</span> <span class="n">flow</span>
-<span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">payload</span><span class="p">,</span> <span class="n">wrap</span>
-
-<span class="k">with</span> <span class="n">wrap</span><span class="o">.</span><span class="n">importer</span><span class="p">():</span>
-    <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-
-
-<span class="nd">@wrap</span><span class="o">.</span><span class="n">Actor</span><span class="o">.</span><span class="n">apply</span>
-<span class="k">def</span> <span class="nf">OrdActor</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">ord</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
-
-
-<span class="nd">@wrap</span><span class="o">.</span><span class="n">Actor</span><span class="o">.</span><span class="n">train</span>
-<span class="k">def</span> <span class="nf">CenterActor</span><span class="p">(</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-
-<span class="nd">@CenterActor</span><span class="o">.</span><span class="n">apply</span>
-<span class="k">def</span> <span class="nf">CenterActor</span><span class="p">(</span>
-    <span class="n">state</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">-</span> <span class="n">state</span>
-
-
-<span class="nd">@wrap</span><span class="o">.</span><span class="n">Actor</span><span class="o">.</span><span class="n">train</span>
-<span class="k">def</span> <span class="nf">MinMax</span><span class="p">(</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-    <span class="n">min_</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">min_</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">min_</span>
-
-
-<span class="nd">@wrap</span><span class="o">.</span><span class="n">Operator</span><span class="o">.</span><span class="n">mapper</span>
-<span class="nd">@MinMax</span><span class="o">.</span><span class="n">apply</span>
-<span class="k">def</span> <span class="nf">MinMax</span><span class="p">(</span>
-    <span class="n">state</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">data</span>
-
-
-<span class="nd">@wrap</span><span class="o">.</span><span class="n">Actor</span><span class="o">.</span><span class="n">apply</span>
-<span class="k">def</span> <span class="nf">OverSampler</span><span class="p">(</span>
-    <span class="n">features</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stateless actor  with two input and two output ports for oversampling the features/labels of the minor class.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">over_sampling</span><span class="o">.</span><span class="n">RandomOverSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span>
-        <span class="n">features</span><span class="p">,</span> <span class="n">labels</span>
-    <span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">Balancer</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">Operator</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Balancer operator inserting the provided sampler into the ``train`` &amp; ``label`` paths.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampler</span><span class="p">:</span> <span class="n">flow</span><span class="o">.</span><span class="n">Builder</span> <span class="o">=</span> <span class="n">OverSampler</span><span class="o">.</span><span class="n">builder</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_sampler</span> <span class="o">=</span> <span class="n">sampler</span>
-
-    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">flow</span><span class="o">.</span><span class="n">Composable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">flow</span><span class="o">.</span><span class="n">Trunk</span><span class="p">:</span>
-        <span class="n">left</span> <span class="o">=</span> <span class="n">scope</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
-        <span class="n">sampler</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">Worker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sampler</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">sampler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">left</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">publisher</span><span class="p">)</span>
-        <span class="n">new_features</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
-        <span class="n">new_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">sampler</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">sampler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">left</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">publisher</span><span class="p">)</span>
-        <span class="n">new_labels</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
-        <span class="n">new_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">sampler</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">left</span><span class="o">.</span><span class="n">use</span><span class="p">(</span>
-            <span class="n">train</span><span class="o">=</span><span class="n">left</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">new_features</span><span class="p">),</span>
-            <span class="n">label</span><span class="o">=</span><span class="n">left</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">new_labels</span><span class="p">),</span>
-        <span class="p">)</span>
-
-
-<span class="n">PIPELINE</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">Balancer</span><span class="p">()</span>
-    <span class="o">&gt;&gt;</span> <span class="n">payload</span><span class="o">.</span><span class="n">MapReduce</span><span class="p">(</span>
-        <span class="n">OrdActor</span><span class="o">.</span><span class="n">builder</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;Level&quot;</span><span class="p">),</span> <span class="n">CenterActor</span><span class="o">.</span><span class="n">builder</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="o">&gt;&gt;</span> <span class="n">MinMax</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;Level&quot;</span><span class="p">)</span>
-    <span class="o">&gt;&gt;</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">project</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span>
-</pre></div>
+<h2 id="Exploration">Exploration<a class="anchor-link" href="#Exploration">&#182;</a></h2><p>We can now interactively use our project skeleton to peek into the data:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=aa24746c-9db1-49f4-81ab-66f1a5e37e5a" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=7afcfe11-2cd5-4a46-89c6-a397a5235f45" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15776,7 +15582,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>dummy/pipeline.py
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
+<span class="n">PROJECT</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s1">&#39;avazuctr&#39;</span><span class="p">)</span>
+<span class="n">PROJECT</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -15784,42 +15592,1071 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hour</th>
+      <th>C1</th>
+      <th>banner_pos</th>
+      <th>site_id</th>
+      <th>site_domain</th>
+      <th>site_category</th>
+      <th>app_id</th>
+      <th>app_domain</th>
+      <th>app_category</th>
+      <th>device_model</th>
+      <th>device_type</th>
+      <th>device_conn_type</th>
+      <th>C14</th>
+      <th>C15</th>
+      <th>C16</th>
+      <th>C17</th>
+      <th>C18</th>
+      <th>C19</th>
+      <th>C20</th>
+      <th>C21</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2014-10-31 00:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>235ba823</td>
+      <td>f6ebf28e</td>
+      <td>f028772b</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>0eb711ec</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8330</td>
+      <td>320</td>
+      <td>50</td>
+      <td>761</td>
+      <td>3</td>
+      <td>175</td>
+      <td>100075</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2014-10-31 00:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>1fbe01fe</td>
+      <td>f3845767</td>
+      <td>28905ebd</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>ecb851b2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>22676</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2616</td>
+      <td>0</td>
+      <td>35</td>
+      <td>100083</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2014-10-31 00:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>1fbe01fe</td>
+      <td>f3845767</td>
+      <td>28905ebd</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>1f0bc64f</td>
+      <td>1</td>
+      <td>0</td>
+      <td>22676</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2616</td>
+      <td>0</td>
+      <td>35</td>
+      <td>100083</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2014-10-31 00:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>85f751fd</td>
+      <td>c4e18dd6</td>
+      <td>50e219e0</td>
+      <td>51cedd4e</td>
+      <td>aefc06bd</td>
+      <td>0f2161f8</td>
+      <td>542422a7</td>
+      <td>1</td>
+      <td>0</td>
+      <td>18648</td>
+      <td>320</td>
+      <td>50</td>
+      <td>1092</td>
+      <td>3</td>
+      <td>809</td>
+      <td>100156</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2014-10-31 00:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>85f751fd</td>
+      <td>c4e18dd6</td>
+      <td>50e219e0</td>
+      <td>9c13b419</td>
+      <td>2347f47a</td>
+      <td>f95efa07</td>
+      <td>1f0bc64f</td>
+      <td>1</td>
+      <td>0</td>
+      <td>23160</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2667</td>
+      <td>0</td>
+      <td>47</td>
+      <td>-1</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>499995</th>
+      <td>2014-10-31 04:00:00</td>
+      <td>1005</td>
+      <td>1</td>
+      <td>b7e9786d</td>
+      <td>b12b9f85</td>
+      <td>f028772b</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>0eb711ec</td>
+      <td>1</td>
+      <td>0</td>
+      <td>22681</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2528</td>
+      <td>0</td>
+      <td>167</td>
+      <td>-1</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>499996</th>
+      <td>2014-10-31 04:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>85f751fd</td>
+      <td>c4e18dd6</td>
+      <td>50e219e0</td>
+      <td>9c13b419</td>
+      <td>2347f47a</td>
+      <td>f95efa07</td>
+      <td>7abbbd5c</td>
+      <td>1</td>
+      <td>0</td>
+      <td>23728</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2717</td>
+      <td>2</td>
+      <td>47</td>
+      <td>100233</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>499997</th>
+      <td>2014-10-31 04:00:00</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>5b08c53b</td>
+      <td>7687a86e</td>
+      <td>3e814130</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>8a4875bd</td>
+      <td>1</td>
+      <td>0</td>
+      <td>20093</td>
+      <td>300</td>
+      <td>250</td>
+      <td>2295</td>
+      <td>2</td>
+      <td>35</td>
+      <td>100075</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>499998</th>
+      <td>2014-10-31 04:00:00</td>
+      <td>1002</td>
+      <td>0</td>
+      <td>887a4754</td>
+      <td>e3d9ca35</td>
+      <td>50e219e0</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>fc10a0d3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>22701</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2624</td>
+      <td>0</td>
+      <td>35</td>
+      <td>-1</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>499999</th>
+      <td>2014-10-31 04:00:00</td>
+      <td>1005</td>
+      <td>1</td>
+      <td>5ee41ff2</td>
+      <td>17d996e6</td>
+      <td>f028772b</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>8a4875bd</td>
+      <td>1</td>
+      <td>0</td>
+      <td>22523</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2599</td>
+      <td>3</td>
+      <td>167</td>
+      <td>-1</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table>
+<p>500000 rows × 20 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div></section><section >
-<div id="cell-id=5dfd3420-ad42-467f-9de1-e3c7780e02cc" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=9792854a-2021-4a1b-90a0-5bc80a7c35da" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Dependencies">Dependencies<a class="anchor-link" href="#Dependencies">&#182;</a></h4><p>Let's add the explicit dependencies used in this project into the <a href="dummy/pyproject.toml">pyproject.toml</a>:</p>
-<ol>
-<li>Open the <a href="dummy/pyproject.toml">pyproject.toml</a>.</li>
-<li>Update it with the code below adding the new dependency of <code>imbalanced-learn==0.10.1</code>:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="k">[project]</span>
-<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dummy&quot;</span>
-<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.1.dev1&quot;</span>
-<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="s">&quot;forml==0.93&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;imbalanced-learn==0.10.1&quot;</span>
-<span class="p">]</span>
-
-<span class="k">[tool.forml]</span>
-<span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dummy&quot;</span>
-</pre></div>
-<ol start="3">
-<li><strong>SAVE THE <a href="pyproject.toml">pyproject.toml</a> FILE!</strong></li>
-</ol>
+<p>Launching it in the <em>train mode</em> allows us to explore the trainset:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=f277cfcb-a2d7-4c11-a055-4ae64bc52c15" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=150242cf-0fce-4e0d-be78-226ddd8add94" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainset</span> <span class="o">=</span> <span class="n">PROJECT</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="n">trainset</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>hour                0
+C1                  0
+banner_pos          0
+site_id             0
+site_domain         0
+site_category       0
+app_id              0
+app_domain          0
+app_category        0
+device_model        0
+device_type         0
+device_conn_type    0
+C14                 0
+C15                 0
+C16                 0
+C17                 0
+C18                 0
+C19                 0
+C20                 0
+C21                 0
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section><section ><div id="cell-id=964ff62e-22ae-41e4-8702-2ba7ad2fb974" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainset</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hour</th>
+      <th>C1</th>
+      <th>banner_pos</th>
+      <th>device_type</th>
+      <th>device_conn_type</th>
+      <th>C14</th>
+      <th>C15</th>
+      <th>C16</th>
+      <th>C17</th>
+      <th>C18</th>
+      <th>C19</th>
+      <th>C20</th>
+      <th>C21</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>500000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+      <td>500000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2014-10-21 01:19:16.514400256</td>
+      <td>1005.033822</td>
+      <td>0.217334</td>
+      <td>1.036556</td>
+      <td>0.223266</td>
+      <td>18189.274888</td>
+      <td>319.185264</td>
+      <td>56.551532</td>
+      <td>2031.249854</td>
+      <td>1.109050</td>
+      <td>201.353280</td>
+      <td>42643.678638</td>
+      <td>74.032270</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2014-10-21 00:00:00</td>
+      <td>1001.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>375.000000</td>
+      <td>120.000000</td>
+      <td>20.000000</td>
+      <td>112.000000</td>
+      <td>0.000000</td>
+      <td>33.000000</td>
+      <td>-1.000000</td>
+      <td>13.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2014-10-21 01:00:00</td>
+      <td>1005.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>15706.000000</td>
+      <td>320.000000</td>
+      <td>50.000000</td>
+      <td>1722.000000</td>
+      <td>0.000000</td>
+      <td>35.000000</td>
+      <td>-1.000000</td>
+      <td>48.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2014-10-21 01:00:00</td>
+      <td>1005.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>18993.000000</td>
+      <td>320.000000</td>
+      <td>50.000000</td>
+      <td>2161.000000</td>
+      <td>0.000000</td>
+      <td>39.000000</td>
+      <td>-1.000000</td>
+      <td>61.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2014-10-21 02:00:00</td>
+      <td>1005.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>20632.000000</td>
+      <td>320.000000</td>
+      <td>50.000000</td>
+      <td>2351.000000</td>
+      <td>3.000000</td>
+      <td>297.000000</td>
+      <td>100084.000000</td>
+      <td>79.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2014-10-21 03:00:00</td>
+      <td>1012.000000</td>
+      <td>7.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>21705.000000</td>
+      <td>1024.000000</td>
+      <td>1024.000000</td>
+      <td>2497.000000</td>
+      <td>3.000000</td>
+      <td>1835.000000</td>
+      <td>100248.000000</td>
+      <td>195.000000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>0.966157</td>
+      <td>0.443991</td>
+      <td>0.489265</td>
+      <td>0.669214</td>
+      <td>3349.867073</td>
+      <td>21.013136</td>
+      <td>36.144704</td>
+      <td>417.909361</td>
+      <td>1.278022</td>
+      <td>273.283478</td>
+      <td>49498.049418</td>
+      <td>40.816648</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=381195dc-6e48-42c6-830c-0447d855385d" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainset</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>click
+0    417919
+1     82081
+Name: count, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div id="cell-id=f9247d88-cb49-4bb5-a0af-04f187355682" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Informal-Base-Pipeline">Informal Base Pipeline<a class="anchor-link" href="#Informal-Base-Pipeline">&#182;</a></h2><p>Let's now put together some minimal feature engineering to fit our base model.</p>
+<h3 id="Extracting-Time-Features">Extracting Time Features<a class="anchor-link" href="#Extracting-Time-Features">&#182;</a></h3><p>We implement a simple stateless for extracting temporal features from the <code>hour</code> timestamp:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=abb8df0a-fd72-48cf-9613-1f21a234d7d4" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">wrap</span>
+
+<span class="nd">@wrap</span><span class="o">.</span><span class="n">Operator</span><span class="o">.</span><span class="n">mapper</span>
+<span class="nd">@wrap</span><span class="o">.</span><span class="n">Actor</span><span class="o">.</span><span class="n">apply</span>
+<span class="k">def</span> <span class="nf">TimeExtractor</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transformer extracting temporal features from the original ``hour`` column.&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="s1">&#39;hour&#39;</span> <span class="ow">in</span> <span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s1">&#39;Missing column: hour&#39;</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;dayofweek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>  <span class="c1"># replacing the original column</span>
+    <span class="n">features</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+    <span class="k">return</span> <span class="n">features</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section ><div id="cell-id=d4273860-e68d-45fb-ad0e-5e73ccca3457" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SOURCE</span> <span class="o">=</span> <span class="n">PROJECT</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">source</span> 
+<span class="n">SOURCE</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">TimeExtractor</span><span class="p">())</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hour</th>
+      <th>C1</th>
+      <th>banner_pos</th>
+      <th>site_id</th>
+      <th>site_domain</th>
+      <th>site_category</th>
+      <th>app_id</th>
+      <th>app_domain</th>
+      <th>app_category</th>
+      <th>device_model</th>
+      <th>...</th>
+      <th>C15</th>
+      <th>C16</th>
+      <th>C17</th>
+      <th>C18</th>
+      <th>C19</th>
+      <th>C20</th>
+      <th>C21</th>
+      <th>dayofweek</th>
+      <th>day</th>
+      <th>month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>235ba823</td>
+      <td>f6ebf28e</td>
+      <td>f028772b</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>0eb711ec</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>761</td>
+      <td>3</td>
+      <td>175</td>
+      <td>100075</td>
+      <td>23</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>1fbe01fe</td>
+      <td>f3845767</td>
+      <td>28905ebd</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>ecb851b2</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2616</td>
+      <td>0</td>
+      <td>35</td>
+      <td>100083</td>
+      <td>51</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>1fbe01fe</td>
+      <td>f3845767</td>
+      <td>28905ebd</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>1f0bc64f</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2616</td>
+      <td>0</td>
+      <td>35</td>
+      <td>100083</td>
+      <td>51</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>85f751fd</td>
+      <td>c4e18dd6</td>
+      <td>50e219e0</td>
+      <td>51cedd4e</td>
+      <td>aefc06bd</td>
+      <td>0f2161f8</td>
+      <td>542422a7</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>1092</td>
+      <td>3</td>
+      <td>809</td>
+      <td>100156</td>
+      <td>61</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>85f751fd</td>
+      <td>c4e18dd6</td>
+      <td>50e219e0</td>
+      <td>9c13b419</td>
+      <td>2347f47a</td>
+      <td>f95efa07</td>
+      <td>1f0bc64f</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2667</td>
+      <td>0</td>
+      <td>47</td>
+      <td>-1</td>
+      <td>221</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>499995</th>
+      <td>4</td>
+      <td>1005</td>
+      <td>1</td>
+      <td>b7e9786d</td>
+      <td>b12b9f85</td>
+      <td>f028772b</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>0eb711ec</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2528</td>
+      <td>0</td>
+      <td>167</td>
+      <td>-1</td>
+      <td>221</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>499996</th>
+      <td>4</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>85f751fd</td>
+      <td>c4e18dd6</td>
+      <td>50e219e0</td>
+      <td>9c13b419</td>
+      <td>2347f47a</td>
+      <td>f95efa07</td>
+      <td>7abbbd5c</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2717</td>
+      <td>2</td>
+      <td>47</td>
+      <td>100233</td>
+      <td>23</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>499997</th>
+      <td>4</td>
+      <td>1005</td>
+      <td>0</td>
+      <td>5b08c53b</td>
+      <td>7687a86e</td>
+      <td>3e814130</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>8a4875bd</td>
+      <td>...</td>
+      <td>300</td>
+      <td>250</td>
+      <td>2295</td>
+      <td>2</td>
+      <td>35</td>
+      <td>100075</td>
+      <td>23</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>499998</th>
+      <td>4</td>
+      <td>1002</td>
+      <td>0</td>
+      <td>887a4754</td>
+      <td>e3d9ca35</td>
+      <td>50e219e0</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>fc10a0d3</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2624</td>
+      <td>0</td>
+      <td>35</td>
+      <td>-1</td>
+      <td>221</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>499999</th>
+      <td>4</td>
+      <td>1005</td>
+      <td>1</td>
+      <td>5ee41ff2</td>
+      <td>17d996e6</td>
+      <td>f028772b</td>
+      <td>ecad2386</td>
+      <td>7801e8d9</td>
+      <td>07d7df22</td>
+      <td>8a4875bd</td>
+      <td>...</td>
+      <td>320</td>
+      <td>50</td>
+      <td>2599</td>
+      <td>3</td>
+      <td>167</td>
+      <td>-1</td>
+      <td>23</td>
+      <td>4</td>
+      <td>31</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<p>500000 rows × 23 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div id="cell-id=48757738-c007-44b6-b9cb-729e7cf9d2db" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Encoding-Categorical-Columns">Encoding Categorical Columns<a class="anchor-link" href="#Encoding-Categorical-Columns">&#182;</a></h3><p>Let's apply the <a href="https://towardsdatascience.com/dealing-with-categorical-variables-by-using-target-encoder-a0f1733a4c69">Target encoding</a> technique to all the categorical columns. We can use the <a href="https://contrib.scikit-learn.org/category_encoders/targetencoder.html">TargetEncoder</a> implementation from the <a href="https://contrib.scikit-learn.org/category_encoders/">Category-encoders</a> package.
+As a new dependency, we add it to the <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a> together with <a href="https://scikit-learn.org/stable/index.html">Scikit-learn</a> which we are going to need in the next step:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a>.</li>
+<li>Update it with the config below adding the new dependency of <code>category-encoders==2.6.0</code> and <code>scikit-learn==1.2.2</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;forml-solution-avazuctr&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.1&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s">&quot;category-encoders==2.6.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;forml==0.93&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;openschema==0.7&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;pandas==2.0.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;scikit-learn==1.2.2&quot;</span>
+<span class="p">]</span>
+
+<span class="k">[tool.forml]</span>
+<span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;avazuctr&quot;</span>
+</pre></div>
+<ol start="3">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=ac3099ff-d60f-4ce8-b466-2af2a805fd4e" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml
@@ -15830,294 +16667,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 
-</div></section></section><section ><section >
-<div id="cell-id=72016884-1b52-4c64-9e49-5d9e3fc0c53b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div></section><section >
+<div id="cell-id=86034913-31c9-4c8c-b135-f8bc7fb7a91b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Adding-Unit-Test-for-our-Balancer-Operator">Adding Unit Test for our Balancer Operator<a class="anchor-link" href="#Adding-Unit-Test-for-our-Balancer-Operator">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div id="cell-id=40ba3093-1162-4235-aa2e-7b745bf6c64b" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>touch<span class="w"> </span>tests/test_pipeline.py
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div id="cell-id=00b0b0d0-b8a1-4e49-93b6-7d3708c12bd6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Edit the created <a href="dummy/tests/test_pipeline.py">test_pipeline.py</a> and implement the unit test:</p>
-<ol>
-<li>Open the <a href="dummy/tests/test_pipeline.py">test_pipeline.py</a>.</li>
-<li>Update it with the code below providing the <code>TestBalancer</code> unit test implementation based on the chapter <a href="2-task-dependency-management.slides.html">2-task-dependency-management</a>:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">testing</span>
-
-<span class="kn">from</span> <span class="nn">dummy</span> <span class="kn">import</span> <span class="n">pipeline</span>
-
-<span class="k">class</span> <span class="nc">TestBalancer</span><span class="p">(</span><span class="n">testing</span><span class="o">.</span><span class="n">operator</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">Balancer</span><span class="p">)):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Balancer unit tests.&quot;&quot;&quot;</span>
-
-    <span class="n">default_oversample</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">testing</span><span class="o">.</span><span class="n">Case</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">train</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-        <span class="o">.</span><span class="n">returns</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="p">)</span>
-</pre></div>
-<ol start="3">
-<li><strong>SAVE THE <a href="dummy/tests/test_pipeline.py">test_pipeline.py</a> FILE!</strong></li>
-</ol>
+<p>Now we can add the encoder into our pipeline:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=7676fe8b-ab15-47a4-8ab7-d25f30b51a0a" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>tests/test_pipeline.py
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=e5bac9a5-f30d-468d-b10a-df4090bf1d43" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Development-Lifecycle">Development Lifecycle<a class="anchor-link" href="#Development-Lifecycle">&#182;</a></h2><p><a href="https://docs.forml.io/en/latest/lifecycle.html#development-life-cycle">Development lifecycle</a> covers all the project development phases leading to a model release.</p>
-
-</div>
-</div>
-</div>
-</div>
-<div id="cell-id=d9ca44d2-871f-42f6-ae8a-e4ff4128c38d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Visualising-the-Train-DAG">Visualising the Train DAG<a class="anchor-link" href="#Visualising-the-Train-DAG">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div id="cell-id=3b32d463-964a-4b18-a2bf-8eb5b1981934" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>train<span class="w"> </span>-R<span class="w"> </span>graphviz
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>running train
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div id="cell-id=2ae554af-0452-443d-97e2-300c98f93626" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This produces a SVG file under <a href="./img/train.svg">dummy/forml.dot.svg</a> visualizing the given train workflow:</p>
-
-</div>
-</div>
-</div>
-</div>
-<div id="cell-id=d9cf8873-d663-4ead-b553-e926da3d0889" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><em>dummy/forml.dot.svg</em>:
-<a href="img/train.svg"><img src="img/train.svg" alt="train flow" /></a></p>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
-<div id="cell-id=e0d1c436-157c-487a-b8ed-082b3c59f304" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Performing-Development-Evaluation">Performing Development Evaluation<a class="anchor-link" href="#Performing-Development-Evaluation">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div id="cell-id=402fa096-17eb-49e4-9b99-8e5be6b9a8a2" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>eval
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>running eval
-0.3772729843470399
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div id="cell-id=c2eeface-27ff-435c-a37c-7e46a723f6e3" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Running-Tests">Running Tests<a class="anchor-link" href="#Running-Tests">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div id="cell-id=4beec46f-a5e4-43e2-97f1-43c78b599d6d" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>test
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>running test
-running egg_info
-creating dummy.egg-info
-writing dummy.egg-info/PKG-INFO
-writing dependency_links to dummy.egg-info/dependency_links.txt
-writing requirements to dummy.egg-info/requires.txt
-writing top-level names to dummy.egg-info/top_level.txt
-writing manifest file &#39;dummy.egg-info/SOURCES.txt&#39;
-reading manifest file &#39;dummy.egg-info/SOURCES.txt&#39;
-writing manifest file &#39;dummy.egg-info/SOURCES.txt&#39;
-running build_ext
-test_default_oversample (tests.test_pipeline.TestBalancer)
-Test of Default Oversample ... ok
-
-----------------------------------------------------------------------
-Ran 1 test in 2.195s
-
-OK
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=51b33c05-d88b-4a01-acbb-ad46aba26ee0" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Releasing">Releasing<a class="anchor-link" href="#Releasing">&#182;</a></h3><p>Once we are happy with the achieved results (good evaluation metric, unit tests passing), we can proceed to releasing the model version.</p>
-<p>Let's start by committing and tagging the project codebase:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=ba1da617-572b-43a5-b3b3-f3c21189149e" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=76f93995-000b-4d53-ae56-8decb4a46893" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16125,8 +16687,19 @@ OK
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Released 0.1.dev1&#39;</span>
-<span class="o">!</span><span class="w"> </span>git<span class="w"> </span>tag<span class="w"> </span><span class="m">0</span>.1.dev1
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">wrap</span><span class="o">.</span><span class="n">importer</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">category_encoders</span> <span class="kn">import</span> <span class="n">TargetEncoder</span>
+
+<span class="n">CATEGORICAL_COLUMNS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;banner_pos&quot;</span><span class="p">,</span> <span class="s2">&quot;site_id&quot;</span><span class="p">,</span> <span class="s2">&quot;site_domain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;site_category&quot;</span><span class="p">,</span> <span class="s2">&quot;app_id&quot;</span><span class="p">,</span> <span class="s2">&quot;app_domain&quot;</span><span class="p">,</span> <span class="s2">&quot;app_category&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;device_model&quot;</span><span class="p">,</span> <span class="s2">&quot;device_type&quot;</span><span class="p">,</span> <span class="s2">&quot;device_conn_type&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;C14&quot;</span><span class="p">,</span> <span class="s2">&quot;C15&quot;</span><span class="p">,</span> <span class="s2">&quot;C16&quot;</span><span class="p">,</span> <span class="s2">&quot;C17&quot;</span><span class="p">,</span> <span class="s2">&quot;C18&quot;</span><span class="p">,</span> <span class="s2">&quot;C19&quot;</span><span class="p">,</span> <span class="s2">&quot;C20&quot;</span><span class="p">,</span> <span class="s2">&quot;C21&quot;</span>
+<span class="p">]</span>
+
+<span class="n">SOURCE</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+    <span class="n">TargetEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="n">CATEGORICAL_COLUMNS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">train</span><span class="p">()</span><span class="o">.</span><span class="n">features</span>
 </pre></div>
 
      </div>
@@ -16140,23 +16713,310 @@ OK
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[main (root-commit) 86a56dd] Released 0.1.dev1
- 8 files changed, 158 insertions(+)
- create mode 100644 .gitignore
- create mode 100644 dummy/__init__.py
- create mode 100644 dummy/evaluation.py
- create mode 100644 dummy/pipeline.py
- create mode 100644 dummy/source.py
- create mode 100644 pyproject.toml
- create mode 100644 tests/__init__.py
- create mode 100644 tests/test_pipeline.py
-</pre>
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hour</th>
+      <th>C1</th>
+      <th>banner_pos</th>
+      <th>site_id</th>
+      <th>site_domain</th>
+      <th>site_category</th>
+      <th>app_id</th>
+      <th>app_domain</th>
+      <th>app_category</th>
+      <th>device_model</th>
+      <th>device_type</th>
+      <th>device_conn_type</th>
+      <th>C14</th>
+      <th>C15</th>
+      <th>C16</th>
+      <th>C17</th>
+      <th>C18</th>
+      <th>C19</th>
+      <th>C20</th>
+      <th>C21</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2014-10-21 00:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.211945</td>
+      <td>0.211945</td>
+      <td>0.208603</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.225080</td>
+      <td>0.164528</td>
+      <td>0.124586</td>
+      <td>0.167300</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.208514</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.171947</td>
+      <td>0.208514</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2014-10-21 00:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.211945</td>
+      <td>0.211945</td>
+      <td>0.208603</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.236538</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.216279</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.208514</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.253048</td>
+      <td>0.208514</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2014-10-21 00:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.211945</td>
+      <td>0.211945</td>
+      <td>0.208603</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.131059</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.216279</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.208514</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.253048</td>
+      <td>0.208514</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2014-10-21 00:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.211945</td>
+      <td>0.211945</td>
+      <td>0.208603</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.293158</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.167300</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.208514</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.253048</td>
+      <td>0.208514</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2014-10-21 00:00:00</td>
+      <td>0.164949</td>
+      <td>0.195663</td>
+      <td>0.036642</td>
+      <td>0.036642</td>
+      <td>0.036364</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.227891</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.080279</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.074237</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.171947</td>
+      <td>0.086167</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>499995</th>
+      <td>2014-10-21 03:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.012195</td>
+      <td>0.012195</td>
+      <td>0.030204</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.187754</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.074220</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.074220</td>
+      <td>0.109077</td>
+      <td>0.166436</td>
+      <td>0.150633</td>
+      <td>0.073100</td>
+    </tr>
+    <tr>
+      <th>499996</th>
+      <td>2014-10-21 03:00:00</td>
+      <td>0.164949</td>
+      <td>0.195663</td>
+      <td>0.442296</td>
+      <td>0.431840</td>
+      <td>0.195131</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.127723</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.278302</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.298913</td>
+      <td>0.109077</td>
+      <td>0.230515</td>
+      <td>0.114082</td>
+      <td>0.217605</td>
+    </tr>
+    <tr>
+      <th>499997</th>
+      <td>2014-10-21 03:00:00</td>
+      <td>0.164949</td>
+      <td>0.195663</td>
+      <td>0.091357</td>
+      <td>0.092482</td>
+      <td>0.195131</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.224570</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.123115</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.125073</td>
+      <td>0.109077</td>
+      <td>0.141789</td>
+      <td>0.177072</td>
+      <td>0.217605</td>
+    </tr>
+    <tr>
+      <th>499998</th>
+      <td>2014-10-21 03:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.211945</td>
+      <td>0.211945</td>
+      <td>0.208603</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.200614</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.218173</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.208514</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.171947</td>
+      <td>0.208514</td>
+    </tr>
+    <tr>
+      <th>499999</th>
+      <td>2014-10-21 03:00:00</td>
+      <td>0.164949</td>
+      <td>0.155877</td>
+      <td>0.211945</td>
+      <td>0.211945</td>
+      <td>0.208603</td>
+      <td>0.196316</td>
+      <td>0.190123</td>
+      <td>0.196119</td>
+      <td>0.216730</td>
+      <td>0.164528</td>
+      <td>0.169448</td>
+      <td>0.211592</td>
+      <td>0.153985</td>
+      <td>0.154188</td>
+      <td>0.208514</td>
+      <td>0.166794</td>
+      <td>0.166436</td>
+      <td>0.253048</td>
+      <td>0.208514</td>
+    </tr>
+  </tbody>
+</table>
+<p>500000 rows × 20 columns</p>
 </div>
 </div>
 
@@ -16164,19 +17024,21 @@ OK
 
 </div>
 
-</div></section><section >
-<div id="cell-id=964ba2ef-3d52-477c-8906-2ac0118c5e37" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+
+</div></section></section><section ><section >
+<div id="cell-id=fdb0c1d4-4cf7-46c6-9dd8-9ff10c693af4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now we can kick off the release process to package the model artifact and publish it into the model registry:</p>
+<h3 id="Base-Model-Pipeline-on-the-Fly">Base Model Pipeline on the Fly<a class="anchor-link" href="#Base-Model-Pipeline-on-the-Fly">&#182;</a></h3><p>Let's just append the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html">MinMaxScaler</a> to the pipeline and the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">LogisticRegression</a> classifier:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=ae1f4438-5d1b-421f-b707-1013c0cface6" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=e220ee2e-42f4-4da5-b10e-392f41336e42" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16184,7 +17046,17 @@ OK
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>release
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">wrap</span><span class="o">.</span><span class="n">importer</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="n">PIPELINE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">TimeExtractor</span><span class="p">()</span>
+    <span class="o">&gt;&gt;</span> <span class="n">TargetEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="n">CATEGORICAL_COLUMNS</span><span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+    <span class="o">&gt;&gt;</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">SOURCE</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="s2">&quot;graphviz&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16198,60 +17070,342 @@ OK
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>running bdist_4ml
-Collecting forml==0.93
-  Using cached forml-0.93-py3-none-any.whl (283 kB)
-Collecting imbalanced-learn==0.10.1
-  Using cached imbalanced_learn-0.10.1-py3-none-any.whl (226 kB)
-Collecting click (from forml==0.93)
-  Using cached click-8.1.3-py3-none-any.whl (96 kB)
-Collecting cloudpickle (from forml==0.93)
-  Using cached cloudpickle-2.2.1-py3-none-any.whl (25 kB)
-Collecting jinja2 (from forml==0.93)
-  Using cached Jinja2-3.1.2-py3-none-any.whl (133 kB)
-Collecting numpy (from forml==0.93)
-  Using cached numpy-1.24.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
-Collecting packaging&gt;=20.0 (from forml==0.93)
-  Using cached packaging-23.1-py3-none-any.whl (48 kB)
-Collecting pandas (from forml==0.93)
-  Using cached pandas-2.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
-Collecting pip (from forml==0.93)
-  Using cached pip-23.1.2-py3-none-any.whl (2.1 MB)
-Collecting scikit-learn (from forml==0.93)
-  Using cached scikit_learn-1.2.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.6 MB)
-Collecting setuptools (from forml==0.93)
-  Using cached setuptools-67.8.0-py3-none-any.whl (1.1 MB)
-Collecting toml (from forml==0.93)
-  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
-Collecting tomli (from forml==0.93)
-  Using cached tomli-2.0.1-py3-none-any.whl (12 kB)
-Collecting scipy&gt;=1.3.2 (from imbalanced-learn==0.10.1)
-  Using cached scipy-1.10.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.4 MB)
-Collecting joblib&gt;=1.1.1 (from imbalanced-learn==0.10.1)
-  Using cached joblib-1.2.0-py3-none-any.whl (297 kB)
-Collecting threadpoolctl&gt;=2.0.0 (from imbalanced-learn==0.10.1)
-  Using cached threadpoolctl-3.1.0-py3-none-any.whl (14 kB)
-Collecting MarkupSafe&gt;=2.0 (from jinja2-&gt;forml==0.93)
-  Using cached MarkupSafe-2.1.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
-Collecting python-dateutil&gt;=2.8.2 (from pandas-&gt;forml==0.93)
-  Using cached python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
-Collecting pytz&gt;=2020.1 (from pandas-&gt;forml==0.93)
-  Using cached pytz-2023.3-py2.py3-none-any.whl (502 kB)
-Collecting tzdata&gt;=2022.1 (from pandas-&gt;forml==0.93)
-  Using cached tzdata-2023.3-py2.py3-none-any.whl (341 kB)
-Collecting six&gt;=1.5 (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;forml==0.93)
-  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
-Installing collected packages: pytz, tzdata, tomli, toml, threadpoolctl, six, setuptools, pip, packaging, numpy, MarkupSafe, joblib, cloudpickle, click, scipy, python-dateutil, jinja2, scikit-learn, pandas, imbalanced-learn, forml
-Successfully installed MarkupSafe-2.1.2 click-8.1.3 cloudpickle-2.2.1 forml-0.93 imbalanced-learn-0.10.1 jinja2-3.1.2 joblib-1.2.0 numpy-1.24.3 packaging-23.1 pandas-2.0.2 pip-23.1.2 python-dateutil-2.8.2 pytz-2023.3 scikit-learn-1.2.2 scipy-1.10.1 setuptools-67.8.0 six-1.16.0 threadpoolctl-3.1.0 toml-0.10.2 tomli-2.0.1 tzdata-2023.3
-running upload
-</pre>
+
+<div class="jp-RenderedSVG jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="image/svg+xml">
+<!--?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?-->
+
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg width="3588pt" height="1064pt" viewBox="0.00 0.00 3588.00 1064.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1060)">
+<title>%3</title>
+<!-- 139705708641264 -->
+<g id="node1" class="node">
+<title>139705708641264</title>
+<path fill="none" stroke="black" d="M3568,-1056C3568,-1056 19,-1056 19,-1056 13,-1056 7,-1050 7,-1044 7,-1044 7,-1032 7,-1032 7,-1026 13,-1020 19,-1020 19,-1020 3568,-1020 3568,-1020 3574,-1020 3580,-1026 3580,-1032 3580,-1032 3580,-1044 3580,-1044 3580,-1050 3574,-1056 3568,-1056"></path>
+<text text-anchor="middle" x="1793.5" y="-1034.3" font-family="Times,serif" font-size="14.00">TableDriver(Reader(con=LazyReaderBackend), Statement(Avazu[Avazu.hour, Avazu.C1, Avazu.banner_pos, Avazu.site_id, Avazu.site_domain, Avazu.site_category, Avazu.app_id, Avazu.app_domain, Avazu.app_category, Avazu.device_model, Avazu.device_type, Avazu.device_conn_type, Avazu.C14, Avazu.C15, Avazu.C16, Avazu.C17, Avazu.C18, Avazu.C19, Avazu.C20, Avazu.C21, Avazu.click].orderby(Avazu.hour&lt;ascending&gt;)[0:500000], ordinal=Ordinal(column=Avazu.hour, once=exactly))).apply</text>
+</g>
+<!-- 139705708638544 -->
+<g id="node2" class="node">
+<title>139705708638544</title>
+<path fill="none" stroke="black" d="M1895,-969C1895,-969 1692,-969 1692,-969 1686,-969 1680,-963 1680,-957 1680,-957 1680,-945 1680,-945 1680,-939 1686,-933 1692,-933 1692,-933 1895,-933 1895,-933 1901,-933 1907,-939 1907,-945 1907,-945 1907,-957 1907,-957 1907,-963 1901,-969 1895,-969"></path>
+<text text-anchor="middle" x="1793.5" y="-947.3" font-family="Times,serif" font-size="14.00">Slicer(range(0, 20), 20).apply</text>
+</g>
+<!-- 139705708641264&amp;#45;&amp;gt;139705708638544 -->
+<g id="edge1" class="edge">
+<title>139705708641264&#45;&gt;139705708638544</title>
+<path fill="none" stroke="black" d="M1793.5,-1019.8C1793.5,-1008.16 1793.5,-992.55 1793.5,-979.24"></path>
+<polygon fill="black" stroke="black" points="1797,-979.18 1793.5,-969.18 1790,-979.18 1797,-979.18"></polygon>
+<text text-anchor="middle" x="1798.5" y="-990.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705704798464 -->
+<g id="node3" class="node">
+<title>139705704798464</title>
+<ellipse fill="none" stroke="black" cx="1750.5" cy="-864" rx="54.69" ry="18"></ellipse>
+<text text-anchor="middle" x="1750.5" y="-860.3" font-family="Times,serif" font-size="14.00">Getter#0</text>
+</g>
+<!-- 139705708638544&amp;#45;&amp;gt;139705704798464 -->
+<g id="edge2" class="edge">
+<title>139705708638544&#45;&gt;139705704798464</title>
+<path fill="none" stroke="black" d="M1784.8,-932.8C1778.76,-920.85 1770.59,-904.72 1763.75,-891.18"></path>
+<polygon fill="black" stroke="black" points="1766.68,-889.23 1759.04,-881.89 1760.43,-892.39 1766.68,-889.23"></polygon>
+<text text-anchor="middle" x="1779.5" y="-903.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705704798608 -->
+<g id="node4" class="node">
+<title>139705704798608</title>
+<ellipse fill="none" stroke="black" cx="1840.5" cy="-810" rx="54.69" ry="18"></ellipse>
+<text text-anchor="middle" x="1840.5" y="-806.3" font-family="Times,serif" font-size="14.00">Getter#1</text>
+</g>
+<!-- 139705708638544&amp;#45;&amp;gt;139705704798608 -->
+<g id="edge3" class="edge">
+<title>139705708638544&#45;&gt;139705704798608</title>
+<path fill="none" stroke="black" d="M1799.26,-932.96C1807.3,-909.2 1821.94,-865.88 1831.44,-837.78"></path>
+<polygon fill="black" stroke="black" points="1834.8,-838.78 1834.69,-828.18 1828.17,-836.54 1834.8,-838.78"></polygon>
+<text text-anchor="middle" x="1814.5" y="-903.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705708638624 -->
+<g id="node5" class="node">
+<title>139705708638624</title>
+<path fill="none" stroke="black" d="M1790.5,-774C1790.5,-774 1686.5,-774 1686.5,-774 1680.5,-774 1674.5,-768 1674.5,-762 1674.5,-762 1674.5,-750 1674.5,-750 1674.5,-744 1680.5,-738 1686.5,-738 1686.5,-738 1790.5,-738 1790.5,-738 1796.5,-738 1802.5,-744 1802.5,-750 1802.5,-750 1802.5,-762 1802.5,-762 1802.5,-768 1796.5,-774 1790.5,-774"></path>
+<text text-anchor="middle" x="1738.5" y="-752.3" font-family="Times,serif" font-size="14.00">ToPandas.apply</text>
+</g>
+<!-- 139705704798464&amp;#45;&amp;gt;139705708638624 -->
+<g id="edge4" class="edge">
+<title>139705704798464&#45;&gt;139705708638624</title>
+<path fill="none" stroke="black" d="M1748.57,-845.97C1746.69,-829.38 1743.81,-803.88 1741.61,-784.43"></path>
+<polygon fill="black" stroke="black" points="1745.07,-783.88 1740.46,-774.34 1738.11,-784.67 1745.07,-783.88"></polygon>
+<text text-anchor="middle" x="1750.5" y="-806.3" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705824884144 -->
+<g id="node13" class="node">
+<title>139705824884144</title>
+<path fill="none" stroke="black" d="M1906.5,-687C1906.5,-687 1802.5,-687 1802.5,-687 1796.5,-687 1790.5,-681 1790.5,-675 1790.5,-675 1790.5,-663 1790.5,-663 1790.5,-657 1796.5,-651 1802.5,-651 1802.5,-651 1906.5,-651 1906.5,-651 1912.5,-651 1918.5,-657 1918.5,-663 1918.5,-663 1918.5,-675 1918.5,-675 1918.5,-681 1912.5,-687 1906.5,-687"></path>
+<text text-anchor="middle" x="1854.5" y="-665.3" font-family="Times,serif" font-size="14.00">ToPandas.apply</text>
+</g>
+<!-- 139705704798608&amp;#45;&amp;gt;139705824884144 -->
+<g id="edge27" class="edge">
+<title>139705704798608&#45;&gt;139705824884144</title>
+<path fill="none" stroke="black" d="M1842.22,-791.96C1844.6,-768.3 1848.93,-725.26 1851.77,-697.15"></path>
+<polygon fill="black" stroke="black" points="1855.25,-697.48 1852.77,-687.18 1848.28,-696.78 1855.25,-697.48"></polygon>
+<text text-anchor="middle" x="1852.5" y="-752.3" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705708640464 -->
+<g id="node6" class="node">
+<title>139705708640464</title>
+<path fill="none" stroke="black" d="M1760.5,-687C1760.5,-687 1622.5,-687 1622.5,-687 1616.5,-687 1610.5,-681 1610.5,-675 1610.5,-675 1610.5,-663 1610.5,-663 1610.5,-657 1616.5,-651 1622.5,-651 1622.5,-651 1760.5,-651 1760.5,-651 1766.5,-651 1772.5,-657 1772.5,-663 1772.5,-663 1772.5,-675 1772.5,-675 1772.5,-681 1766.5,-687 1760.5,-687"></path>
+<text text-anchor="middle" x="1691.5" y="-665.3" font-family="Times,serif" font-size="14.00">TimeExtractor.apply</text>
+</g>
+<!-- 139705708638624&amp;#45;&amp;gt;139705708640464 -->
+<g id="edge5" class="edge">
+<title>139705708638624&#45;&gt;139705708640464</title>
+<path fill="none" stroke="black" d="M1728.99,-737.8C1722.36,-725.82 1713.41,-709.62 1705.91,-696.06"></path>
+<polygon fill="black" stroke="black" points="1708.9,-694.23 1701,-687.18 1702.77,-697.62 1708.9,-694.23"></polygon>
+<text text-anchor="middle" x="1722.5" y="-708.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705708637824 -->
+<g id="node11" class="node">
+<title>139705708637824</title>
+<polygon fill="none" stroke="black" points="1677,-600 0,-600 0,-564 1677,-564 1677,-600"></polygon>
+<text text-anchor="middle" x="838.5" y="-578.3" font-family="Times,serif" font-size="14.00">TargetEncoder(cols=[&#39;C1&#39;, &#39;banner_pos&#39;, &#39;site_id&#39;, &#39;site_domain&#39;, &#39;site_category&#39;, &#39;app_id&#39;, &#39;app_domain&#39;, &#39;app_category&#39;, &#39;device_model&#39;, &#39;device_type&#39;, &#39;device_conn_type&#39;, &#39;C14&#39;, &#39;C15&#39;, &#39;C16&#39;, &#39;C17&#39;, &#39;C18&#39;, &#39;C19&#39;, &#39;C20&#39;, &#39;C21&#39;]).setstate.train</text>
+</g>
+<!-- 139705708640464&amp;#45;&amp;gt;139705708637824 -->
+<g id="edge11" class="edge">
+<title>139705708640464&#45;&gt;139705708637824</title>
+<path fill="none" stroke="black" d="M1610.48,-659.93C1475.62,-646.49 1201.91,-619.21 1019.34,-601.02"></path>
+<polygon fill="black" stroke="black" points="1019.65,-597.53 1009.35,-600.03 1018.96,-604.5 1019.65,-597.53"></polygon>
+<text text-anchor="middle" x="1320.5" y="-621.8" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705707666128 -->
+<g id="node14" class="node">
+<title>139705707666128</title>
+<path fill="none" stroke="black" d="M1720.5,-513C1720.5,-513 62.5,-513 62.5,-513 56.5,-513 50.5,-507 50.5,-501 50.5,-501 50.5,-489 50.5,-489 50.5,-483 56.5,-477 62.5,-477 62.5,-477 1720.5,-477 1720.5,-477 1726.5,-477 1732.5,-483 1732.5,-489 1732.5,-489 1732.5,-501 1732.5,-501 1732.5,-507 1726.5,-513 1720.5,-513"></path>
+<text text-anchor="middle" x="891.5" y="-491.3" font-family="Times,serif" font-size="14.00">TargetEncoder(cols=[&#39;C1&#39;, &#39;banner_pos&#39;, &#39;site_id&#39;, &#39;site_domain&#39;, &#39;site_category&#39;, &#39;app_id&#39;, &#39;app_domain&#39;, &#39;app_category&#39;, &#39;device_model&#39;, &#39;device_type&#39;, &#39;device_conn_type&#39;, &#39;C14&#39;, &#39;C15&#39;, &#39;C16&#39;, &#39;C17&#39;, &#39;C18&#39;, &#39;C19&#39;, &#39;C20&#39;, &#39;C21&#39;]).setstate.apply</text>
+</g>
+<!-- 139705708640464&amp;#45;&amp;gt;139705707666128 -->
+<g id="edge14" class="edge">
+<title>139705708640464&#45;&gt;139705707666128</title>
+<path fill="none" stroke="black" d="M1696.51,-650.96C1702.14,-627.88 1707.82,-586.95 1685.5,-564 1661.67,-539.5 1537.93,-523.78 1394.97,-513.72"></path>
+<polygon fill="black" stroke="black" points="1394.86,-510.2 1384.65,-513 1394.38,-517.18 1394.86,-510.2"></polygon>
+<text text-anchor="middle" x="1705.5" y="-578.3" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705704646976 -->
+<g id="node7" class="node">
+<title>139705704646976</title>
+<path fill="none" stroke="black" d="M1555.5,-32.73C1555.5,-34.53 1534.43,-36 1508.5,-36 1482.57,-36 1461.5,-34.53 1461.5,-32.73 1461.5,-32.73 1461.5,-3.27 1461.5,-3.27 1461.5,-1.47 1482.57,0 1508.5,0 1534.43,0 1555.5,-1.47 1555.5,-3.27 1555.5,-3.27 1555.5,-32.73 1555.5,-32.73"></path>
+<path fill="none" stroke="black" d="M1555.5,-32.73C1555.5,-30.92 1534.43,-29.45 1508.5,-29.45 1482.57,-29.45 1461.5,-30.92 1461.5,-32.73"></path>
+<text text-anchor="middle" x="1508.5" y="-14.3" font-family="Times,serif" font-size="14.00">Committer</text>
+</g>
+<!-- 139705704748976 -->
+<g id="node8" class="node">
+<title>139705704748976</title>
+<path fill="none" stroke="black" d="M656.5,-455.73C656.5,-457.53 639.92,-459 619.5,-459 599.08,-459 582.5,-457.53 582.5,-455.73 582.5,-455.73 582.5,-426.27 582.5,-426.27 582.5,-424.47 599.08,-423 619.5,-423 639.92,-423 656.5,-424.47 656.5,-426.27 656.5,-426.27 656.5,-455.73 656.5,-455.73"></path>
+<path fill="none" stroke="black" d="M656.5,-455.73C656.5,-453.92 639.92,-452.45 619.5,-452.45 599.08,-452.45 582.5,-453.92 582.5,-455.73"></path>
+<text text-anchor="middle" x="619.5" y="-437.3" font-family="Times,serif" font-size="14.00">Dumper</text>
+</g>
+<!-- 139705704748976&amp;#45;&amp;gt;139705704646976 -->
+<g id="edge6" class="edge">
+<title>139705704748976&#45;&gt;139705704646976</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M656.82,-437.39C779.5,-428.34 1162.5,-395.95 1162.5,-344.5 1162.5,-344.5 1162.5,-344.5 1162.5,-104 1162.5,-45.23 1353.14,-26.87 1451.4,-21.32"></path>
+<polygon fill="black" stroke="black" points="1451.68,-24.81 1461.48,-20.77 1451.3,-17.82 1451.68,-24.81"></polygon>
+<text text-anchor="middle" x="1167.5" y="-242.3" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705704759104 -->
+<g id="node9" class="node">
+<title>139705704759104</title>
+<path fill="none" stroke="black" d="M1545.5,-260.73C1545.5,-262.53 1528.92,-264 1508.5,-264 1488.08,-264 1471.5,-262.53 1471.5,-260.73 1471.5,-260.73 1471.5,-231.27 1471.5,-231.27 1471.5,-229.47 1488.08,-228 1508.5,-228 1528.92,-228 1545.5,-229.47 1545.5,-231.27 1545.5,-231.27 1545.5,-260.73 1545.5,-260.73"></path>
+<path fill="none" stroke="black" d="M1545.5,-260.73C1545.5,-258.92 1528.92,-257.45 1508.5,-257.45 1488.08,-257.45 1471.5,-258.92 1471.5,-260.73"></path>
+<text text-anchor="middle" x="1508.5" y="-242.3" font-family="Times,serif" font-size="14.00">Dumper</text>
+</g>
+<!-- 139705704759104&amp;#45;&amp;gt;139705704646976 -->
+<g id="edge7" class="edge">
+<title>139705704759104&#45;&gt;139705704646976</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1508.5,-227.64C1508.5,-188.52 1508.5,-93.21 1508.5,-46.17"></path>
+<polygon fill="black" stroke="black" points="1512,-46.11 1508.5,-36.11 1505,-46.11 1512,-46.11"></polygon>
+<text text-anchor="middle" x="1513.5" y="-144.8" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705704800672 -->
+<g id="node10" class="node">
+<title>139705704800672</title>
+<path fill="none" stroke="black" d="M1823.5,-119.73C1823.5,-121.53 1806.92,-123 1786.5,-123 1766.08,-123 1749.5,-121.53 1749.5,-119.73 1749.5,-119.73 1749.5,-90.27 1749.5,-90.27 1749.5,-88.47 1766.08,-87 1786.5,-87 1806.92,-87 1823.5,-88.47 1823.5,-90.27 1823.5,-90.27 1823.5,-119.73 1823.5,-119.73"></path>
+<path fill="none" stroke="black" d="M1823.5,-119.73C1823.5,-117.92 1806.92,-116.45 1786.5,-116.45 1766.08,-116.45 1749.5,-117.92 1749.5,-119.73"></path>
+<text text-anchor="middle" x="1786.5" y="-101.3" font-family="Times,serif" font-size="14.00">Dumper</text>
+</g>
+<!-- 139705704800672&amp;#45;&amp;gt;139705704646976 -->
+<g id="edge8" class="edge">
+<title>139705704800672&#45;&gt;139705704646976</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1749.3,-92.62C1702.12,-78.2 1620.31,-53.19 1565.31,-36.37"></path>
+<polygon fill="black" stroke="black" points="1566.29,-33.01 1555.7,-33.43 1564.24,-39.7 1566.29,-33.01"></polygon>
+<text text-anchor="middle" x="1668.5" y="-57.8" font-family="Times,serif" font-size="14.00">2</text>
+</g>
+<!-- 139705708637824&amp;#45;&amp;gt;139705704748976 -->
+<g id="edge9" class="edge">
+<title>139705708637824&#45;&gt;139705704748976</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M330.13,-564C187.48,-554 64.59,-538.14 41.5,-513 30.68,-501.22 30.53,-488.65 41.5,-477 59.59,-457.78 437.05,-446.54 572.03,-443.12"></path>
+<polygon fill="black" stroke="black" points="572.16,-446.62 582.07,-442.87 571.99,-439.62 572.16,-446.62"></polygon>
+<text text-anchor="middle" x="152.5" y="-534.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705708637824&amp;#45;&amp;gt;139705707666128 -->
+<g id="edge13" class="edge">
+<title>139705708637824&#45;&gt;139705707666128</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M849.23,-563.8C856.77,-551.7 866.99,-535.3 875.5,-521.67"></path>
+<polygon fill="black" stroke="black" points="878.47,-523.51 880.79,-513.18 872.53,-519.81 878.47,-523.51"></polygon>
+<text text-anchor="middle" x="873.5" y="-534.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705704648368 -->
+<g id="node12" class="node">
+<title>139705704648368</title>
+<path fill="none" stroke="black" d="M871.5,-683.73C871.5,-685.53 856.71,-687 838.5,-687 820.29,-687 805.5,-685.53 805.5,-683.73 805.5,-683.73 805.5,-654.27 805.5,-654.27 805.5,-652.47 820.29,-651 838.5,-651 856.71,-651 871.5,-652.47 871.5,-654.27 871.5,-654.27 871.5,-683.73 871.5,-683.73"></path>
+<path fill="none" stroke="black" d="M871.5,-683.73C871.5,-681.92 856.71,-680.45 838.5,-680.45 820.29,-680.45 805.5,-681.92 805.5,-683.73"></path>
+<text text-anchor="middle" x="838.5" y="-665.3" font-family="Times,serif" font-size="14.00">Loader</text>
+</g>
+<!-- 139705704648368&amp;#45;&amp;gt;139705708637824 -->
+<g id="edge10" class="edge">
+<title>139705704648368&#45;&gt;139705708637824</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M838.5,-650.8C838.5,-639.16 838.5,-623.55 838.5,-610.24"></path>
+<polygon fill="black" stroke="black" points="842,-610.18 838.5,-600.18 835,-610.18 842,-610.18"></polygon>
+<text text-anchor="middle" x="843.5" y="-621.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705824884144&amp;#45;&amp;gt;139705708637824 -->
+<g id="edge12" class="edge">
+<title>139705824884144&#45;&gt;139705708637824</title>
+<path fill="none" stroke="black" d="M1790.12,-652.43C1787.21,-651.91 1784.33,-651.43 1781.5,-651 1620.13,-626.47 1441.84,-610.74 1284.12,-600.67"></path>
+<polygon fill="black" stroke="black" points="1283.96,-597.15 1273.76,-600.02 1283.52,-604.14 1283.96,-597.15"></polygon>
+<text text-anchor="middle" x="1632.5" y="-621.8" font-family="Times,serif" font-size="14.00">2</text>
+</g>
+<!-- 139705707671088 -->
+<g id="node15" class="node">
+<title>139705707671088</title>
+<polygon fill="none" stroke="black" points="1758.5,-405 1538.5,-405 1538.5,-369 1758.5,-369 1758.5,-405"></polygon>
+<text text-anchor="middle" x="1648.5" y="-383.3" font-family="Times,serif" font-size="14.00">MinMaxScaler.setstate.train</text>
+</g>
+<!-- 139705824884144&amp;#45;&amp;gt;139705707671088 -->
+<g id="edge18" class="edge">
+<title>139705824884144&#45;&gt;139705707671088</title>
+<path fill="none" stroke="black" d="M1856.13,-650.94C1858.65,-615.62 1860.05,-533.12 1825.5,-477 1804.73,-443.26 1766.8,-421.86 1731.37,-408.53"></path>
+<polygon fill="black" stroke="black" points="1732.54,-405.23 1721.95,-405.15 1730.18,-411.82 1732.54,-405.23"></polygon>
+<text text-anchor="middle" x="1854.5" y="-534.8" font-family="Times,serif" font-size="14.00">2</text>
+</g>
+<!-- 139705707667488 -->
+<g id="node18" class="node">
+<title>139705707667488</title>
+<polygon fill="none" stroke="black" points="2229,-210 1718,-210 1718,-174 2229,-174 2229,-210"></polygon>
+<text text-anchor="middle" x="1973.5" y="-188.3" font-family="Times,serif" font-size="14.00">LogisticRegression(max_iter=1000, random_state=42).setstate.train</text>
+</g>
+<!-- 139705824884144&amp;#45;&amp;gt;139705707667488 -->
+<g id="edge24" class="edge">
+<title>139705824884144&#45;&gt;139705707667488</title>
+<path fill="none" stroke="black" d="M1918.55,-657.39C1959.32,-646.55 2004.5,-625.05 2004.5,-583 2004.5,-583 2004.5,-583 2004.5,-299 2004.5,-271.03 1994.43,-240.51 1985.77,-219.43"></path>
+<polygon fill="black" stroke="black" points="1988.96,-217.99 1981.81,-210.18 1982.53,-220.75 1988.96,-217.99"></polygon>
+<text text-anchor="middle" x="2009.5" y="-437.3" font-family="Times,serif" font-size="14.00">2</text>
+</g>
+<!-- 139705707664608 -->
+<g id="node20" class="node">
+<title>139705707664608</title>
+<polygon fill="none" stroke="black" points="1699.5,-210 1545.5,-210 1545.5,-174 1699.5,-174 1699.5,-210"></polygon>
+<text text-anchor="middle" x="1622.5" y="-188.3" font-family="Times,serif" font-size="14.00">Captor(Value).train</text>
+</g>
+<!-- 139705824884144&amp;#45;&amp;gt;139705707664608 -->
+<g id="edge26" class="edge">
+<title>139705824884144&#45;&gt;139705707664608</title>
+<path fill="none" stroke="black" d="M1863.67,-650.96C1871.83,-634.17 1882.5,-607.55 1882.5,-583 1882.5,-583 1882.5,-583 1882.5,-299 1882.5,-266.84 1892.16,-249.79 1868.5,-228 1844.19,-205.6 1758.03,-213.97 1709.97,-209.65"></path>
+<polygon fill="black" stroke="black" points="1710.11,-206.14 1699.76,-208.43 1709.28,-213.09 1710.11,-206.14"></polygon>
+<text text-anchor="middle" x="1887.5" y="-437.3" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705707666128&amp;#45;&amp;gt;139705707671088 -->
+<g id="edge17" class="edge">
+<title>139705707666128&#45;&gt;139705707671088</title>
+<path fill="none" stroke="black" d="M1073.76,-476.96C1123.08,-471.79 1176.4,-465.69 1225.5,-459 1335.86,-443.97 1461.67,-422.26 1547.19,-406.82"></path>
+<polygon fill="black" stroke="black" points="1547.94,-410.24 1557.16,-405.01 1546.69,-403.35 1547.94,-410.24"></polygon>
+<text text-anchor="middle" x="1449.5" y="-437.3" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705707665648 -->
+<g id="node17" class="node">
+<title>139705707665648</title>
+<path fill="none" stroke="black" d="M1748.5,-318C1748.5,-318 1548.5,-318 1548.5,-318 1542.5,-318 1536.5,-312 1536.5,-306 1536.5,-306 1536.5,-294 1536.5,-294 1536.5,-288 1542.5,-282 1548.5,-282 1548.5,-282 1748.5,-282 1748.5,-282 1754.5,-282 1760.5,-288 1760.5,-294 1760.5,-294 1760.5,-306 1760.5,-306 1760.5,-312 1754.5,-318 1748.5,-318"></path>
+<text text-anchor="middle" x="1648.5" y="-296.3" font-family="Times,serif" font-size="14.00">MinMaxScaler.setstate.apply</text>
+</g>
+<!-- 139705707666128&amp;#45;&amp;gt;139705707665648 -->
+<g id="edge20" class="edge">
+<title>139705707666128&#45;&gt;139705707665648</title>
+<path fill="none" stroke="black" d="M958.35,-476.96C1098.66,-441.18 1423.14,-358.46 1571.71,-320.58"></path>
+<polygon fill="black" stroke="black" points="1572.84,-323.9 1581.67,-318.04 1571.11,-317.12 1572.84,-323.9"></polygon>
+<text text-anchor="middle" x="1374.5" y="-383.3" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705707671088&amp;#45;&amp;gt;139705704759104 -->
+<g id="edge15" class="edge">
+<title>139705707671088&#45;&gt;139705704759104</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1599.17,-368.97C1574.32,-358.02 1545.68,-341.41 1527.5,-318 1517.84,-305.55 1513.07,-288.59 1510.73,-274.36"></path>
+<polygon fill="black" stroke="black" points="1514.16,-273.59 1509.38,-264.14 1507.22,-274.51 1514.16,-273.59"></polygon>
+<text text-anchor="middle" x="1567.5" y="-339.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705707671088&amp;#45;&amp;gt;139705707665648 -->
+<g id="edge19" class="edge">
+<title>139705707671088&#45;&gt;139705707665648</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1648.5,-368.8C1648.5,-357.16 1648.5,-341.55 1648.5,-328.24"></path>
+<polygon fill="black" stroke="black" points="1652,-328.18 1648.5,-318.18 1645,-328.18 1652,-328.18"></polygon>
+<text text-anchor="middle" x="1653.5" y="-339.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705704759200 -->
+<g id="node16" class="node">
+<title>139705704759200</title>
+<path fill="none" stroke="black" d="M1816.5,-509.73C1816.5,-511.53 1801.71,-513 1783.5,-513 1765.29,-513 1750.5,-511.53 1750.5,-509.73 1750.5,-509.73 1750.5,-480.27 1750.5,-480.27 1750.5,-478.47 1765.29,-477 1783.5,-477 1801.71,-477 1816.5,-478.47 1816.5,-480.27 1816.5,-480.27 1816.5,-509.73 1816.5,-509.73"></path>
+<path fill="none" stroke="black" d="M1816.5,-509.73C1816.5,-507.92 1801.71,-506.45 1783.5,-506.45 1765.29,-506.45 1750.5,-507.92 1750.5,-509.73"></path>
+<text text-anchor="middle" x="1783.5" y="-491.3" font-family="Times,serif" font-size="14.00">Loader</text>
+</g>
+<!-- 139705704759200&amp;#45;&amp;gt;139705707671088 -->
+<g id="edge16" class="edge">
+<title>139705704759200&#45;&gt;139705707671088</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1762.11,-477.2C1739.53,-459.48 1703.77,-431.4 1678.41,-411.48"></path>
+<polygon fill="black" stroke="black" points="1680.26,-408.49 1670.24,-405.07 1675.94,-414 1680.26,-408.49"></polygon>
+<text text-anchor="middle" x="1740.5" y="-437.3" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705707665648&amp;#45;&amp;gt;139705707667488 -->
+<g id="edge23" class="edge">
+<title>139705707665648&#45;&gt;139705707667488</title>
+<path fill="none" stroke="black" d="M1700.72,-281.97C1758.2,-263.22 1850.55,-233.1 1911.62,-213.18"></path>
+<polygon fill="black" stroke="black" points="1912.72,-216.5 1921.14,-210.08 1910.55,-209.85 1912.72,-216.5"></polygon>
+<text text-anchor="middle" x="1863.5" y="-242.3" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- 139705707665648&amp;#45;&amp;gt;139705707664608 -->
+<g id="edge25" class="edge">
+<title>139705707665648&#45;&gt;139705707664608</title>
+<path fill="none" stroke="black" d="M1644.32,-281.97C1640.23,-265.3 1633.94,-239.65 1629.16,-220.16"></path>
+<polygon fill="black" stroke="black" points="1632.53,-219.22 1626.75,-210.34 1625.74,-220.89 1632.53,-219.22"></polygon>
+<text text-anchor="middle" x="1643.5" y="-242.3" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705707667488&amp;#45;&amp;gt;139705704800672 -->
+<g id="edge21" class="edge">
+<title>139705707667488&#45;&gt;139705704800672</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1935.66,-173.8C1905.25,-159.98 1862.51,-140.55 1830.56,-126.03"></path>
+<polygon fill="black" stroke="black" points="1832,-122.84 1821.44,-121.88 1829.1,-129.21 1832,-122.84"></polygon>
+<text text-anchor="middle" x="1895.5" y="-144.8" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+<!-- 139705704800720 -->
+<g id="node19" class="node">
+<title>139705704800720</title>
+<path fill="none" stroke="black" d="M1976.5,-314.73C1976.5,-316.53 1961.71,-318 1943.5,-318 1925.29,-318 1910.5,-316.53 1910.5,-314.73 1910.5,-314.73 1910.5,-285.27 1910.5,-285.27 1910.5,-283.47 1925.29,-282 1943.5,-282 1961.71,-282 1976.5,-283.47 1976.5,-285.27 1976.5,-285.27 1976.5,-314.73 1976.5,-314.73"></path>
+<path fill="none" stroke="black" d="M1976.5,-314.73C1976.5,-312.92 1961.71,-311.45 1943.5,-311.45 1925.29,-311.45 1910.5,-312.92 1910.5,-314.73"></path>
+<text text-anchor="middle" x="1943.5" y="-296.3" font-family="Times,serif" font-size="14.00">Loader</text>
+</g>
+<!-- 139705704800720&amp;#45;&amp;gt;139705707667488 -->
+<g id="edge22" class="edge">
+<title>139705704800720&#45;&gt;139705707667488</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1948.32,-281.97C1953.04,-265.3 1960.3,-239.65 1965.81,-220.16"></path>
+<polygon fill="black" stroke="black" points="1969.24,-220.92 1968.59,-210.34 1962.5,-219.01 1969.24,-220.92"></polygon>
+<text text-anchor="middle" x="1967.5" y="-242.3" font-family="Times,serif" font-size="14.00">0</text>
+</g>
+</g>
+</svg>
+
 </div>
+
 </div>
 
 </div>
@@ -16259,19 +17413,18 @@ running upload
 </div>
 
 </div></section></section><section ><section >
-<div id="cell-id=bdbcf446-10f3-49f3-9b52-68bd3be43eb2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=9e0481b1-149f-4ea5-9d20-b0876c1aaee4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Model-Registry">Model Registry<a class="anchor-link" href="#Model-Registry">&#182;</a></h2><p><a href="https://docs.forml.io/en/latest/registry.html">Model registry</a> serves as a crucial interface for managing published models throughout the production lifecycle. It can be provided through a number of different implementations.</p>
-<p>The registry has a tree hierarchy with levels of <code>project</code> / <code>release</code> / <code>generation</code>:</p>
+<h3 id="Evaluating-the-Pipeline">Evaluating the Pipeline<a class="anchor-link" href="#Evaluating-the-Pipeline">&#182;</a></h3><p>Using our evaluation definition from <a href="forml-solution-avazuctr/avazuctr/evaluation.py">avazuctr/evaluation.py</a>, we get the <code>logloss</code> of this our base model:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=cbc89b06-4b4f-4e93-b57c-96be3c21340b" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=f9062d8f-6822-4a76-937f-f859da19bf81" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16279,7 +17432,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SOURCE</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">,</span> <span class="n">evaluation</span><span class="o">=</span><span class="n">PROJECT</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16293,251 +17446,23 @@ running upload
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>dummy  
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div id="cell-id=77b96f68-3979-4758-9935-0dc4d73119f9" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>dummy
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
 
 
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0.1.dev1  
-</pre>
-</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>0.39313604609251457</pre>
 </div>
 
 </div>
 
 </div>
 
-</div><div id="cell-id=e0a5dfcf-f4dc-4bcf-b5fe-439557213b7a" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>dummy<span class="w"> </span><span class="m">0</span>.1.dev1
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
-</div><div id="cell-id=040a7052-9cd6-4d71-b6e2-7e73390235cd" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>tree<span class="w"> </span>/opt/forml/assets/registry/
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre><span class="ansi-blue-intense-fg ansi-bold">/opt/forml/assets/registry/</span>
-└── <span class="ansi-blue-intense-fg ansi-bold">dummy</span>
-    └── <span class="ansi-blue-intense-fg ansi-bold">0.1.dev1</span>
-        └── package.4ml
-
-2 directories, 1 file
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=b7812ffd-a492-4b32-ba1d-ae646ed34d4a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Production-Lifecycle">Production Lifecycle<a class="anchor-link" href="#Production-Lifecycle">&#182;</a></h2><p><a href="https://docs.forml.io/en/latest/lifecycle.html#production-life-cycle">Production lifecycle</a> takes care of all the necessary model operations after its release.</p>
-
-</div>
-</div>
-</div>
-</div>
-<div id="cell-id=da27b00a-be2b-4085-a6e8-650b33563f54" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Model-Training">Model Training<a class="anchor-link" href="#Model-Training">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div id="cell-id=2c972a6b-4c21-4db9-a1fa-50fdb87467b4" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>train<span class="w"> </span>dummy
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div id="cell-id=cac57853-40fb-4b6f-8645-d379434e3416" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>dummy<span class="w"> </span><span class="m">0</span>.1.dev1
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>1  
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div id="cell-id=40985bb0-8b2c-427b-b719-ab35b1678c98" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>tree<span class="w"> </span>/opt/forml/assets/registry/
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre><span class="ansi-blue-intense-fg ansi-bold">/opt/forml/assets/registry/</span>
-└── <span class="ansi-blue-intense-fg ansi-bold">dummy</span>
-    └── <span class="ansi-blue-intense-fg ansi-bold">0.1.dev1</span>
-        ├── <span class="ansi-blue-intense-fg ansi-bold">1</span>
-        │   ├── 21c560d1-dac8-41f0-b5bd-246e76e00bd6.bin
-        │   ├── 4da96680-dcd0-44f9-b8f6-74d8b7d12360.bin
-        │   ├── 643066e9-aad2-41f5-bd8f-73fdf736d1b8.bin
-        │   └── tag.toml
-        └── package.4ml
-
-3 directories, 5 files
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=2258188d-69a6-4400-8c74-1c3d726ed79b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Followup-Steps">Followup Steps<a class="anchor-link" href="#Followup-Steps">&#182;</a></h3><p>We will leave the remaining steps of the production lifecycle to the final chapter <a href="../3-solution">3-solution</a> which works with a real dataset.</p>
-
-</div>
-</div>
-</div>
 </div></section></section>
 </div>
 </div>

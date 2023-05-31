@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>1-data-abstraction slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>5-lifecycle-iterations slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -15166,229 +15166,30 @@ div.jp-OutputPrompt {
 
 <div class="reveal">
 <div class="slides"><section ><section >
-<div id="cell-id=71ac14c9-f311-4119-beb9-0827be94b0af" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=5601b2da-8275-47c9-bb28-7adaff749641" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Data-Abstraction">Data Abstraction<a class="anchor-link" href="#Data-Abstraction">&#182;</a></h1><p>Objective:</p>
-<blockquote>
-<p>Learning how to define project data source requirements independently of actual data to achieve <em>portability</em> while maintaining <em>reproducibility</em>.</p>
-</blockquote>
+<h1 id="Production-Lifecycle-Iterations">Production Lifecycle Iterations<a class="anchor-link" href="#Production-Lifecycle-Iterations">&#182;</a></h1><p>Let's now explore the options for any iterations in the production lifecycle.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=91844a41-6843-4f0e-8fc0-d87910056cff" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=c3eafcc6-a72d-45c7-83b8-8668c0def76a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Principles:</p>
-<ol>
-<li>Projects are decoupled from physical data sources through their <strong>schemas</strong>.</li>
-<li>If capable of doing so, the runtime platform resolves project data requirements using one of its configured <strong>feeds</strong>.</li>
-<li>This tutorial workspace is provided with two dummy schemas (see the local <a href="dummycatalog.py">dummycatalog.py</a> module): <code>Foo</code>, <code>Bar</code>, and <code>Baz</code>.</li>
-<li>This tutorial <strong>platform</strong> is configured with a feed capable of resolving data for the first two of these schemas.</li>
-</ol>
+<h2 id="Monitoring-the-Serving-Performance">Monitoring the Serving Performance<a class="anchor-link" href="#Monitoring-the-Serving-Performance">&#182;</a></h2><p>The foremost action is monitoring the serving performance by evaluating the predictions against the eventually obtained true outcomes:</p>
 
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
-<div id="cell-id=8349cc32-a50a-484d-aaac-95a43f17a2e6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Schema-Catalog">Schema Catalog<a class="anchor-link" href="#Schema-Catalog">&#182;</a></h2><p><a href="https://docs.forml.io/en/latest/io.html#schema-catalogs">Schema catalogs</a> act as mutual dataset references between <em>projects</em> (ML solutions) and <em>platforms</em>. They are regular Python modules with schema instances defined using the <a href="https://docs.forml.io/en/latest/dsl/schema.html">ForML Schema API</a>.</p>
-<p><img src="img/datadecoupling.svg" alt="decoupling" /></p>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
-<div id="cell-id=15debe66-a1ee-4dc2-8673-7f2862e638be" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We are going to use the following <em>dummy</em> catalog throughout this tutorial:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=032a4fd9-1bea-4897-9f5d-a828b9a4cdbc" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="n">display</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="s1">&#39;dummycatalog.py&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<style>pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.output_html .hll { background-color: #ffffcc }
-.output_html { background: #f8f8f8; }
-.output_html .c { color: #3D7B7B; font-style: italic } /* Comment */
-.output_html .err { border: 1px solid #FF0000 } /* Error */
-.output_html .k { color: #008000; font-weight: bold } /* Keyword */
-.output_html .o { color: #666666 } /* Operator */
-.output_html .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
-.output_html .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
-.output_html .cp { color: #9C6500 } /* Comment.Preproc */
-.output_html .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
-.output_html .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
-.output_html .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
-.output_html .gd { color: #A00000 } /* Generic.Deleted */
-.output_html .ge { font-style: italic } /* Generic.Emph */
-.output_html .gr { color: #E40000 } /* Generic.Error */
-.output_html .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.output_html .gi { color: #008400 } /* Generic.Inserted */
-.output_html .go { color: #717171 } /* Generic.Output */
-.output_html .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.output_html .gs { font-weight: bold } /* Generic.Strong */
-.output_html .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.output_html .gt { color: #0044DD } /* Generic.Traceback */
-.output_html .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.output_html .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.output_html .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.output_html .kp { color: #008000 } /* Keyword.Pseudo */
-.output_html .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.output_html .kt { color: #B00040 } /* Keyword.Type */
-.output_html .m { color: #666666 } /* Literal.Number */
-.output_html .s { color: #BA2121 } /* Literal.String */
-.output_html .na { color: #687822 } /* Name.Attribute */
-.output_html .nb { color: #008000 } /* Name.Builtin */
-.output_html .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.output_html .no { color: #880000 } /* Name.Constant */
-.output_html .nd { color: #AA22FF } /* Name.Decorator */
-.output_html .ni { color: #717171; font-weight: bold } /* Name.Entity */
-.output_html .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
-.output_html .nf { color: #0000FF } /* Name.Function */
-.output_html .nl { color: #767600 } /* Name.Label */
-.output_html .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.output_html .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.output_html .nv { color: #19177C } /* Name.Variable */
-.output_html .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.output_html .w { color: #bbbbbb } /* Text.Whitespace */
-.output_html .mb { color: #666666 } /* Literal.Number.Bin */
-.output_html .mf { color: #666666 } /* Literal.Number.Float */
-.output_html .mh { color: #666666 } /* Literal.Number.Hex */
-.output_html .mi { color: #666666 } /* Literal.Number.Integer */
-.output_html .mo { color: #666666 } /* Literal.Number.Oct */
-.output_html .sa { color: #BA2121 } /* Literal.String.Affix */
-.output_html .sb { color: #BA2121 } /* Literal.String.Backtick */
-.output_html .sc { color: #BA2121 } /* Literal.String.Char */
-.output_html .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.output_html .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.output_html .s2 { color: #BA2121 } /* Literal.String.Double */
-.output_html .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
-.output_html .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.output_html .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
-.output_html .sx { color: #008000 } /* Literal.String.Other */
-.output_html .sr { color: #A45A77 } /* Literal.String.Regex */
-.output_html .s1 { color: #BA2121 } /* Literal.String.Single */
-.output_html .ss { color: #19177C } /* Literal.String.Symbol */
-.output_html .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.output_html .fm { color: #0000FF } /* Name.Function.Magic */
-.output_html .vc { color: #19177C } /* Name.Variable.Class */
-.output_html .vg { color: #19177C } /* Name.Variable.Global */
-.output_html .vi { color: #19177C } /* Name.Variable.Instance */
-.output_html .vm { color: #19177C } /* Name.Variable.Magic */
-.output_html .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This is a FooBarBaz schema catalog used throughout this tutorial.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">forml.io</span> <span class="kn">import</span> <span class="n">dsl</span>
-
-
-<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Foo dataset schema.&quot;&quot;&quot;</span>
-
-    <span class="n">Timestamp</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">())</span>
-    <span class="n">Label</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Integer</span><span class="p">())</span>
-    <span class="n">Level</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
-    <span class="n">Value</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Float</span><span class="p">())</span>
-    <span class="n">Bar</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Integer</span><span class="p">())</span>
-
-
-<span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bar dataset schema.&quot;&quot;&quot;</span>
-
-    <span class="n">Key</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Integer</span><span class="p">())</span>
-    <span class="n">Length</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Float</span><span class="p">())</span>
-    <span class="n">Color</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
-
-
-<span class="k">class</span> <span class="nc">Baz</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Baz dataset schema.</span>
-
-<span class="sd">    Note: To demonstrate an unavailable dataset, this schema is deliberately</span>
-<span class="sd">          not resolved by any of the feeds configured within this tutorial</span>
-<span class="sd">          platform.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">Key</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Integer</span><span class="p">())</span>
-    <span class="n">Name</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
-    <span class="n">Dob</span> <span class="o">=</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">dsl</span><span class="o">.</span><span class="n">Date</span><span class="p">())</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=5c21fa90-fc50-443d-a87c-dbce13a6ebb4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Basic-Data-Loading">Basic Data Loading<a class="anchor-link" href="#Basic-Data-Loading">&#182;</a></h2><ul>
-<li>The term <em>Artifact</em> used below represents a handle to a particular ML project</li>
-<li>Minimal <a href="https://docs.forml.io/en/latest/interactive.html#project-handle">ForML artifact</a> = <em>Source</em> component + <em>Pipeline</em> component</li>
-<li>Artifact can be <a href="https://docs.forml.io/en/latest/interactive.html#virtual-launcher">launched in interactive mode</a> using its <code>.launcher</code> property</li>
-</ul>
-<p>Let's create and launch an example of a minimal artifact:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=42fefd1d-369a-424b-90f9-1943d3dc19f7" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=5a7db147-e5ab-4b54-8ce9-d4ccf704b95c" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15396,14 +15197,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
-<span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">payload</span>
-<span class="kn">from</span> <span class="nn">dummycatalog</span> <span class="kn">import</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span>
-
-<span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span>   <span class="c1"># Minimal query statement refering to dummycatalog </span>
-<span class="n">PIPELINE</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">ToPandas</span><span class="p">()</span>  <span class="c1"># Minimal pipeline a single operator</span>
-<span class="n">PROJECT</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span>
-<span class="n">PROJECT</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>  <span class="c1"># Triggering the launcher</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="err">\</span>
+    <span class="o">--</span><span class="n">lower</span> <span class="s1">&#39;2014-10-21 03:00:00&#39;</span>
 </pre></div>
 
      </div>
@@ -15422,209 +15217,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:32:47,003: lazy: Loading Foo
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0.38597474427877504
 </pre>
 </div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>Label</th>
-      <th>Level</th>
-      <th>Value</th>
-      <th>Bar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2021-05-05 03:12:19</td>
-      <td>1</td>
-      <td>Alpha</td>
-      <td>0.26</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2021-05-11 11:27:50</td>
-      <td>0</td>
-      <td>Tango</td>
-      <td>0.94</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2021-05-11 17:35:27</td>
-      <td>0</td>
-      <td>Zulu</td>
-      <td>0.57</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2021-05-06 19:49:43</td>
-      <td>0</td>
-      <td>Uniform</td>
-      <td>0.69</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2021-05-12 08:53:35</td>
-      <td>0</td>
-      <td>Xray</td>
-      <td>0.83</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2021-05-12 22:06:04</td>
-      <td>0</td>
-      <td>Victor</td>
-      <td>0.61</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2021-05-07 13:17:43</td>
-      <td>1</td>
-      <td>Echo</td>
-      <td>0.12</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2021-05-13 16:25:18</td>
-      <td>0</td>
-      <td>Whiskey</td>
-      <td>0.78</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2021-05-13 06:31:58</td>
-      <td>0</td>
-      <td>November</td>
-      <td>0.92</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2021-05-08 15:48:20</td>
-      <td>0</td>
-      <td>Yankee</td>
-      <td>0.68</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>2021-05-14 19:56:01</td>
-      <td>1</td>
-      <td>Charlie</td>
-      <td>0.35</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2021-05-14 04:03:32</td>
-      <td>0</td>
-      <td>Mike</td>
-      <td>0.54</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2021-05-09 01:18:13</td>
-      <td>1</td>
-      <td>Bravo</td>
-      <td>0.07</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2021-05-15 19:24:46</td>
-      <td>0</td>
-      <td>Romeo</td>
-      <td>0.58</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2021-05-15 21:31:22</td>
-      <td>0</td>
-      <td>Oscar</td>
-      <td>0.84</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2021-05-16 23:48:57</td>
-      <td>0</td>
-      <td>Quebec</td>
-      <td>0.74</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2021-05-16 00:56:39</td>
-      <td>1</td>
-      <td>Foxtrot</td>
-      <td>0.45</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2021-05-10 16:06:06</td>
-      <td>0</td>
-      <td>Papa</td>
-      <td>0.59</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2021-05-17 14:17:43</td>
-      <td>1</td>
-      <td>Delta</td>
-      <td>0.33</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2021-05-17 06:52:51</td>
-      <td>0</td>
-      <td>Siera</td>
-      <td>0.72</td>
-      <td>6</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
 </div>
 
 </div>
@@ -15632,35 +15228,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 
 </div></section></section><section ><section >
-<div id="cell-id=36a7e391-ff0d-4f9d-abcb-6af55baa9aaf" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=1de5a10c-e968-4447-8e64-173565a56f75" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Advanced-Query-DSL">Advanced Query DSL<a class="anchor-link" href="#Advanced-Query-DSL">&#182;</a></h2><p>The data requirements can be refined more granularly using the <a href="https://docs.forml.io/en/latest/dsl/query/syntax.html">Query DSL Syntax</a>:</p>
+<h2 id="Model-Refreshing-(Update)">Model Refreshing (Update)<a class="anchor-link" href="#Model-Refreshing-(Update)">&#182;</a></h2><p>As time goes, the model is going to start indicating drift. Updating it with the recent data should be part of the regular process. With ForML, this involves producing new <em>generation</em> of the model:</p>
 
 </div>
 </div>
 </div>
-</div>
-<div id="cell-id=dbe8640a-ee65-473e-b743-0cbccc3e6817" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Column-Projection">Column Projection<a class="anchor-link" href="#Column-Projection">&#182;</a></h3><p>Extend the basic <code>STATEMENT</code> to select just the <code>Foo.Level</code>, <code>Foo.Value</code> and <code>Foo.Timestamp</code> columns.</p>
-<p>Hints:</p>
-<ul>
-<li>Use the <a href="https://docs.forml.io/en/latest/dsl/query/design.html#forml.io.dsl.Queryable.select">Foo.select()</a> method</li>
-<li>Schema fields are referenced using the syntax of <code>Schema.FieldName</code></li>
-</ul>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=4e4e28f4-ff31-4af5-a73e-1741a3a79ee0" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=75171aca-730c-4193-9ed1-1b71ac07890b" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15668,9 +15247,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">Level</span><span class="p">,</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Value</span><span class="p">,</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span>
-
-<span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>train<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="err">\</span>
+    <span class="o">--</span><span class="n">lower</span> <span class="s1">&#39;2014-10-21 03:00:00&#39;</span> \
+    <span class="o">--</span><span class="n">upper</span> <span class="s1">&#39;2014-10-21 05:00:00&#39;</span> 
 </pre></div>
 
      </div>
@@ -15678,201 +15257,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:32:49,136: lazy: Loading Foo
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Level</th>
-      <th>Value</th>
-      <th>Timestamp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alpha</td>
-      <td>0.26</td>
-      <td>2021-05-05 03:12:19</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Tango</td>
-      <td>0.94</td>
-      <td>2021-05-11 11:27:50</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Zulu</td>
-      <td>0.57</td>
-      <td>2021-05-11 17:35:27</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Uniform</td>
-      <td>0.69</td>
-      <td>2021-05-06 19:49:43</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Xray</td>
-      <td>0.83</td>
-      <td>2021-05-12 08:53:35</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Victor</td>
-      <td>0.61</td>
-      <td>2021-05-12 22:06:04</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Echo</td>
-      <td>0.12</td>
-      <td>2021-05-07 13:17:43</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Whiskey</td>
-      <td>0.78</td>
-      <td>2021-05-13 16:25:18</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>November</td>
-      <td>0.92</td>
-      <td>2021-05-13 06:31:58</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Yankee</td>
-      <td>0.68</td>
-      <td>2021-05-08 15:48:20</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Charlie</td>
-      <td>0.35</td>
-      <td>2021-05-14 19:56:01</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Mike</td>
-      <td>0.54</td>
-      <td>2021-05-14 04:03:32</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Bravo</td>
-      <td>0.07</td>
-      <td>2021-05-09 01:18:13</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Romeo</td>
-      <td>0.58</td>
-      <td>2021-05-15 19:24:46</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Oscar</td>
-      <td>0.84</td>
-      <td>2021-05-15 21:31:22</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Quebec</td>
-      <td>0.74</td>
-      <td>2021-05-16 23:48:57</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Foxtrot</td>
-      <td>0.45</td>
-      <td>2021-05-16 00:56:39</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Papa</td>
-      <td>0.59</td>
-      <td>2021-05-10 16:06:06</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Delta</td>
-      <td>0.33</td>
-      <td>2021-05-17 14:17:43</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Siera</td>
-      <td>0.72</td>
-      <td>2021-05-17 06:52:51</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=c746a635-a74e-4f00-a4b8-ae475e3973bf" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Row-Ordering">Row Ordering<a class="anchor-link" href="#Row-Ordering">&#182;</a></h3><p>Extend the basic <code>STATEMENT</code> to order the records by <code>Timestamp</code>.</p>
-<p>Hints:</p>
-<ul>
-<li>Use the <a href="https://docs.forml.io/en/latest/dsl/query/design.html#forml.io.dsl.Queryable.orderby">Foo.orderby()</a> method</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=64213e8c-9bcc-4225-b25f-aeee2fa91397" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=f8334fca-bbb4-45ac-9c4b-38f5ec08a6cc" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15880,9 +15265,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">orderby</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span>
-
-<span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="m">0</span>.1
 </pre></div>
 
      </div>
@@ -15901,232 +15284,29 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:32:51,303: lazy: Loading Foo
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>1  2  
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>Label</th>
-      <th>Level</th>
-      <th>Value</th>
-      <th>Bar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2021-05-05 03:12:19</td>
-      <td>1</td>
-      <td>Alpha</td>
-      <td>0.26</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2021-05-06 19:49:43</td>
-      <td>0</td>
-      <td>Uniform</td>
-      <td>0.69</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2021-05-07 13:17:43</td>
-      <td>1</td>
-      <td>Echo</td>
-      <td>0.12</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2021-05-08 15:48:20</td>
-      <td>0</td>
-      <td>Yankee</td>
-      <td>0.68</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2021-05-09 01:18:13</td>
-      <td>1</td>
-      <td>Bravo</td>
-      <td>0.07</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2021-05-10 16:06:06</td>
-      <td>0</td>
-      <td>Papa</td>
-      <td>0.59</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2021-05-11 11:27:50</td>
-      <td>0</td>
-      <td>Tango</td>
-      <td>0.94</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2021-05-11 17:35:27</td>
-      <td>0</td>
-      <td>Zulu</td>
-      <td>0.57</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2021-05-12 08:53:35</td>
-      <td>0</td>
-      <td>Xray</td>
-      <td>0.83</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2021-05-12 22:06:04</td>
-      <td>0</td>
-      <td>Victor</td>
-      <td>0.61</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>2021-05-13 06:31:58</td>
-      <td>0</td>
-      <td>November</td>
-      <td>0.92</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2021-05-13 16:25:18</td>
-      <td>0</td>
-      <td>Whiskey</td>
-      <td>0.78</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2021-05-14 04:03:32</td>
-      <td>0</td>
-      <td>Mike</td>
-      <td>0.54</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2021-05-14 19:56:01</td>
-      <td>1</td>
-      <td>Charlie</td>
-      <td>0.35</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2021-05-15 19:24:46</td>
-      <td>0</td>
-      <td>Romeo</td>
-      <td>0.58</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2021-05-15 21:31:22</td>
-      <td>0</td>
-      <td>Oscar</td>
-      <td>0.84</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2021-05-16 00:56:39</td>
-      <td>1</td>
-      <td>Foxtrot</td>
-      <td>0.45</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2021-05-16 23:48:57</td>
-      <td>0</td>
-      <td>Quebec</td>
-      <td>0.74</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2021-05-17 06:52:51</td>
-      <td>0</td>
-      <td>Siera</td>
-      <td>0.72</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2021-05-17 14:17:43</td>
-      <td>1</td>
-      <td>Delta</td>
-      <td>0.33</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
 
 </div>
 
 </div>
 
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=e3bb08cd-6d82-48a3-9160-c064c55ba38c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div></section><section >
+<div id="cell-id=b2433c6f-b90a-4010-b303-c5a40a9141d8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Row-Count-Limitation">Row Count Limitation<a class="anchor-link" href="#Row-Count-Limitation">&#182;</a></h3><p>Extend the statement to limit the result just to 5 records.</p>
-<p>Hints:</p>
-<ul>
-<li>Use the (<a href="https://docs.forml.io/en/latest/dsl/query/design.html#forml.io.dsl.Queryable.limit">Foo.limit()</a> method)</li>
-</ul>
+<p>Wait for the <em>serving gateway</em> to pick up the newer model (given its default <code>latest</code> strategy) and try a new request:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=d7d6b29f-31a9-4211-ade0-11d2e089fd10" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=7fef671b-501b-4433-8410-e31da3398c11" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16134,9 +15314,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="err">&#39;</span><span class="o">[{</span><span class="w"> </span><span class="err">\</span>
+    <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-10-21 05:00:00&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;banner_pos&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;site_id&quot;</span><span class="p">:</span> <span class="s2">&quot;887a4754&quot;</span><span class="p">,</span> <span class="s2">&quot;site_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;e3d9ca35&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;site_category&quot;</span><span class="p">:</span> <span class="s2">&quot;50e219e0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;app_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ecad2386&quot;</span><span class="p">,</span> <span class="s2">&quot;app_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;7801e8d9&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;app_category&quot;</span><span class="p">:</span> <span class="s2">&quot;07d7df22&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0e79d423&quot;</span><span class="p">,</span> <span class="s2">&quot;device_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;9f423918&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_model&quot;</span><span class="p">:</span> <span class="s2">&quot;fc10a0d3&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;device_conn_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;C1&quot;</span><span class="p">:</span> <span class="s2">&quot;1002&quot;</span><span class="p">,</span> <span class="s2">&quot;C14&quot;</span><span class="p">:</span> <span class="s2">&quot;22701&quot;</span><span class="p">,</span> <span class="s2">&quot;C15&quot;</span><span class="p">:</span> <span class="s2">&quot;320&quot;</span><span class="p">,</span> <span class="s2">&quot;C16&quot;</span><span class="p">:</span> <span class="s2">&quot;50&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;C17&quot;</span><span class="p">:</span> <span class="s2">&quot;2624&quot;</span><span class="p">,</span> <span class="s2">&quot;C18&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;C19&quot;</span><span class="p">:</span> <span class="s2">&quot;35&quot;</span><span class="p">,</span> <span class="s2">&quot;C20&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;C21&quot;</span><span class="p">:</span> <span class="s2">&quot;221&quot;</span> \
+<span class="p">}]</span><span class="s1">&#39; http://127.0.0.1:8000/forml-solution-avazuctr</span>
 </pre></div>
 
      </div>
@@ -16155,86 +15345,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:32:53,464: lazy: Loading Foo
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>Label</th>
-      <th>Level</th>
-      <th>Value</th>
-      <th>Bar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2021-05-05 03:12:19</td>
-      <td>1</td>
-      <td>Alpha</td>
-      <td>0.26</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2021-05-11 11:27:50</td>
-      <td>0</td>
-      <td>Tango</td>
-      <td>0.94</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2021-05-11 17:35:27</td>
-      <td>0</td>
-      <td>Zulu</td>
-      <td>0.57</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2021-05-06 19:49:43</td>
-      <td>0</td>
-      <td>Uniform</td>
-      <td>0.69</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2021-05-12 08:53:35</td>
-      <td>0</td>
-      <td>Xray</td>
-      <td>0.83</td>
-      <td>5</td>
-    </tr>
-  </tbody>
-</table>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[{&#34;c0&#34;:0.1343483272}]</pre>
 </div>
 </div>
 
@@ -16243,25 +15355,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 
 </div>
-
-</div></section></section><section ><section >
-<div id="cell-id=ee967a38-0b98-4435-aaf0-d94f34d653f4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=41a27ac5-2873-41aa-9b3e-5c49129705e7" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Row-Filtering">Row Filtering<a class="anchor-link" href="#Row-Filtering">&#182;</a></h3><p>Extend the statement to filter just rows with <code>Timestamp</code> after <code>2021-05-13</code>:</p>
-<p>Hints:</p>
-<ul>
-<li>Use the <a href="https://docs.forml.io/en/latest/dsl/query/design.html#forml.io.dsl.Queryable.where">Foo.where()</a> method</li>
-<li>Native Python operators and literals (e.g. integers, strings, but also <code>datetime</code> instances) can be used directly on Schema fields to compose expressions</li>
-</ul>
+<p>The performance monitoring for the next period would then go like this:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=f3ae60ab-2108-47fc-9b7b-cdbf9c80d551" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=7419baa6-1ceb-4173-a889-9aee43bcac69" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16269,11 +15374,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-
-<span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">Timestamp</span> <span class="o">&gt;</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
-
-<span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="err">\</span>
+    <span class="o">--</span><span class="n">lower</span> <span class="s1">&#39;2014-10-21 05:00:00&#39;</span>
 </pre></div>
 
      </div>
@@ -16292,129 +15394,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:32:55,616: lazy: Loading Foo
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0.3717689632757772
 </pre>
 </div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>Label</th>
-      <th>Level</th>
-      <th>Value</th>
-      <th>Bar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2021-05-13 16:25:18</td>
-      <td>0</td>
-      <td>Whiskey</td>
-      <td>0.78</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2021-05-13 06:31:58</td>
-      <td>0</td>
-      <td>November</td>
-      <td>0.92</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2021-05-14 19:56:01</td>
-      <td>1</td>
-      <td>Charlie</td>
-      <td>0.35</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2021-05-14 04:03:32</td>
-      <td>0</td>
-      <td>Mike</td>
-      <td>0.54</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2021-05-15 19:24:46</td>
-      <td>0</td>
-      <td>Romeo</td>
-      <td>0.58</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2021-05-15 21:31:22</td>
-      <td>0</td>
-      <td>Oscar</td>
-      <td>0.84</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2021-05-16 23:48:57</td>
-      <td>0</td>
-      <td>Quebec</td>
-      <td>0.74</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2021-05-16 00:56:39</td>
-      <td>1</td>
-      <td>Foxtrot</td>
-      <td>0.45</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2021-05-17 14:17:43</td>
-      <td>1</td>
-      <td>Delta</td>
-      <td>0.33</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2021-05-17 06:52:51</td>
-      <td>0</td>
-      <td>Siera</td>
-      <td>0.72</td>
-      <td>6</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
 </div>
 
 </div>
@@ -16422,22 +15405,31 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 
 </div></section></section><section ><section >
-<div id="cell-id=c2e5df36-df5f-4eb2-bbca-5f62bf0d176d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=50ed91d4-a50b-4fed-8450-03cb368e33f1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Multiple-Datasets-Joining">Multiple Datasets Joining<a class="anchor-link" href="#Multiple-Datasets-Joining">&#182;</a></h3><p>Extend the basic statement to join the <code>Foo</code> schema with <code>Bar</code> using the <code>Foo.Bar == Bar.Key</code> condition.</p>
-<p>Hints:</p>
-<ul>
-<li>Use the <a href="https://docs.forml.io/en/latest/dsl/query/design.html#forml.io.dsl.Origin.inner_join">Foo.inner_join()</a> method</li>
-</ul>
+<h2 id="New-Model-Release-(Upgrade)">New Model Release (Upgrade)<a class="anchor-link" href="#New-Model-Release-(Upgrade)">&#182;</a></h2><p>There can be a number of reasons why just refreshing the model might not bring the required improvements and a true gain would only be possible through a conceptually new version of the (logical) model (i.e. its code). This involves a new development iteration(s) and eventually a new release of the model.</p>
+<p>We will demonstrate this process by an attempt to simplify the model by removing some of the not-so-useful columns.</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=31fc1e03-dcaf-4690-990c-55e6168f1fbc" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div>
+<div id="cell-id=971a875c-ebde-4c38-9c8e-b4f3635f2634" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Let's tap into our pipeline just after the <code>TargetEncoder</code> to be able to analyze that data:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=43fb7147-2db8-4840-8081-1db60fc8a0af" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16445,9 +15437,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">inner_join</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Bar</span> <span class="o">==</span> <span class="n">Bar</span><span class="o">.</span><span class="n">Key</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
+<span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">payload</span><span class="p">,</span> <span class="n">wrap</span>
+<span class="kn">from</span> <span class="nn">avazuctr</span> <span class="kn">import</span> <span class="n">pipeline</span>
 
-<span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">wrap</span><span class="o">.</span><span class="n">importer</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">category_encoders</span> <span class="kn">import</span> <span class="n">TargetEncoder</span>
+
+<span class="n">PROJECT</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">&quot;avazuctr&quot;</span><span class="p">)</span>
+<span class="n">trainset</span> <span class="o">=</span> <span class="n">PROJECT</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+    <span class="n">TargetEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="n">pipeline</span><span class="o">.</span><span class="n">CATEGORICAL_COLUMNS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16455,309 +15455,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:32:57,803: lazy: Loading Bar
-INFO: 2023-05-30 23:32:57,806: lazy: Loading Foo
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Timestamp</th>
-      <th>Label</th>
-      <th>Level</th>
-      <th>Value</th>
-      <th>Bar</th>
-      <th>Key</th>
-      <th>Length</th>
-      <th>Color</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2021-05-05 03:12:19</td>
-      <td>1</td>
-      <td>Alpha</td>
-      <td>0.26</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.69</td>
-      <td>red</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2021-05-11 11:27:50</td>
-      <td>0</td>
-      <td>Tango</td>
-      <td>0.94</td>
-      <td>3</td>
-      <td>3</td>
-      <td>0.58</td>
-      <td>yellow</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2021-05-11 17:35:27</td>
-      <td>0</td>
-      <td>Zulu</td>
-      <td>0.57</td>
-      <td>4</td>
-      <td>4</td>
-      <td>0.53</td>
-      <td>green</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2021-05-06 19:49:43</td>
-      <td>0</td>
-      <td>Uniform</td>
-      <td>0.69</td>
-      <td>2</td>
-      <td>2</td>
-      <td>0.61</td>
-      <td>orange</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2021-05-12 08:53:35</td>
-      <td>0</td>
-      <td>Xray</td>
-      <td>0.83</td>
-      <td>5</td>
-      <td>5</td>
-      <td>0.47</td>
-      <td>blue</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2021-05-12 22:06:04</td>
-      <td>0</td>
-      <td>Victor</td>
-      <td>0.61</td>
-      <td>6</td>
-      <td>6</td>
-      <td>0.41</td>
-      <td>violet</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2021-05-07 13:17:43</td>
-      <td>1</td>
-      <td>Echo</td>
-      <td>0.12</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.69</td>
-      <td>red</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2021-05-13 16:25:18</td>
-      <td>0</td>
-      <td>Whiskey</td>
-      <td>0.78</td>
-      <td>3</td>
-      <td>3</td>
-      <td>0.58</td>
-      <td>yellow</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2021-05-13 06:31:58</td>
-      <td>0</td>
-      <td>November</td>
-      <td>0.92</td>
-      <td>4</td>
-      <td>4</td>
-      <td>0.53</td>
-      <td>green</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2021-05-08 15:48:20</td>
-      <td>0</td>
-      <td>Yankee</td>
-      <td>0.68</td>
-      <td>5</td>
-      <td>5</td>
-      <td>0.47</td>
-      <td>blue</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>2021-05-14 19:56:01</td>
-      <td>1</td>
-      <td>Charlie</td>
-      <td>0.35</td>
-      <td>2</td>
-      <td>2</td>
-      <td>0.61</td>
-      <td>orange</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2021-05-14 04:03:32</td>
-      <td>0</td>
-      <td>Mike</td>
-      <td>0.54</td>
-      <td>6</td>
-      <td>6</td>
-      <td>0.41</td>
-      <td>violet</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2021-05-09 01:18:13</td>
-      <td>1</td>
-      <td>Bravo</td>
-      <td>0.07</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.69</td>
-      <td>red</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2021-05-15 19:24:46</td>
-      <td>0</td>
-      <td>Romeo</td>
-      <td>0.58</td>
-      <td>3</td>
-      <td>3</td>
-      <td>0.58</td>
-      <td>yellow</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2021-05-15 21:31:22</td>
-      <td>0</td>
-      <td>Oscar</td>
-      <td>0.84</td>
-      <td>4</td>
-      <td>4</td>
-      <td>0.53</td>
-      <td>green</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2021-05-16 23:48:57</td>
-      <td>0</td>
-      <td>Quebec</td>
-      <td>0.74</td>
-      <td>5</td>
-      <td>5</td>
-      <td>0.47</td>
-      <td>blue</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2021-05-16 00:56:39</td>
-      <td>1</td>
-      <td>Foxtrot</td>
-      <td>0.45</td>
-      <td>2</td>
-      <td>2</td>
-      <td>0.61</td>
-      <td>orange</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2021-05-10 16:06:06</td>
-      <td>0</td>
-      <td>Papa</td>
-      <td>0.59</td>
-      <td>6</td>
-      <td>6</td>
-      <td>0.41</td>
-      <td>violet</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2021-05-17 14:17:43</td>
-      <td>1</td>
-      <td>Delta</td>
-      <td>0.33</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.69</td>
-      <td>red</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2021-05-17 06:52:51</td>
-      <td>0</td>
-      <td>Siera</td>
-      <td>0.72</td>
-      <td>6</td>
-      <td>6</td>
-      <td>0.41</td>
-      <td>violet</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=636b3d59-447d-4586-ad17-dfee3dd47561" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div></section><section >
+<div id="cell-id=ef12a3f9-e5c1-4c46-bb5c-d6b5c1cda575" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h2><p>Formulate a single DSL query to:</p>
-<ul>
-<li>Join Foo &amp; Bar using their <code>Foo.Bar == Bar.Key</code></li>
-<li>Return only rows where <code>Foo.Value &gt; 0.5</code></li>
-<li>Order result by <code>Foo.Level</code></li>
-<li>Select just the <code>Bar.Length</code>, <code>Foo.Value</code> and <code>Bar.Color</code></li>
-</ul>
+<p>Now we can simply calculate the pairwise feature correlations and filter anything above 0.9:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=a7443ed0-eaec-4328-96ef-9dc98d2cd4f5" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=99fb3774-d131-4b72-b237-0baa8ff4f0e3" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16765,14 +15475,9 @@ INFO: 2023-05-30 23:32:57,806: lazy: Loading Foo
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STATEMENT</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">Foo</span><span class="o">.</span><span class="n">inner_join</span><span class="p">(</span><span class="n">Bar</span><span class="p">,</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Bar</span> <span class="o">==</span> <span class="n">Bar</span><span class="o">.</span><span class="n">Key</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Bar</span><span class="o">.</span><span class="n">Length</span><span class="p">,</span> <span class="n">Foo</span><span class="o">.</span><span class="n">Value</span><span class="p">,</span> <span class="n">Bar</span><span class="o">.</span><span class="n">Color</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">Value</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">orderby</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">Level</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">trainset</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">corr</span><span class="p">[</span><span class="n">corr</span> <span class="o">&gt;</span> <span class="mf">0.90</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16786,17 +15491,6 @@ INFO: 2023-05-30 23:32:57,806: lazy: Loading Foo
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>INFO: 2023-05-30 23:33:00,015: lazy: Loading Bar
-INFO: 2023-05-30 23:33:00,018: lazy: Loading Foo
-</pre>
-</div>
-</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
@@ -16822,95 +15516,125 @@ INFO: 2023-05-30 23:33:00,018: lazy: Loading Foo
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Length</th>
-      <th>Value</th>
-      <th>Color</th>
+      <th>C1</th>
+      <th>site_id</th>
+      <th>site_domain</th>
+      <th>device_type</th>
+      <th>C14</th>
+      <th>C15</th>
+      <th>C16</th>
+      <th>C17</th>
+      <th>C21</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>0.41</td>
-      <td>0.54</td>
-      <td>violet</td>
+      <th>C1</th>
+      <td>1.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.932983</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>0.53</td>
-      <td>0.92</td>
-      <td>green</td>
+      <th>site_id</th>
+      <td>NaN</td>
+      <td>1.00000</td>
+      <td>0.97686</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>0.53</td>
-      <td>0.84</td>
-      <td>green</td>
+      <th>site_domain</th>
+      <td>NaN</td>
+      <td>0.97686</td>
+      <td>1.00000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>0.41</td>
-      <td>0.59</td>
-      <td>violet</td>
+      <th>device_type</th>
+      <td>0.932983</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>0.47</td>
-      <td>0.74</td>
-      <td>blue</td>
+      <th>C14</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.985713</td>
+      <td>0.913383</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>0.58</td>
-      <td>0.58</td>
-      <td>yellow</td>
+      <th>C15</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0000</td>
+      <td>0.9425</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>0.41</td>
-      <td>0.72</td>
-      <td>violet</td>
+      <th>C16</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.9425</td>
+      <td>1.0000</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>0.58</td>
-      <td>0.94</td>
-      <td>yellow</td>
+      <th>C17</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.985713</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000000</td>
+      <td>0.925165</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>0.61</td>
-      <td>0.69</td>
-      <td>orange</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>0.41</td>
-      <td>0.61</td>
-      <td>violet</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>0.58</td>
-      <td>0.78</td>
-      <td>yellow</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>0.47</td>
-      <td>0.83</td>
-      <td>blue</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>0.47</td>
-      <td>0.68</td>
-      <td>blue</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>0.53</td>
-      <td>0.57</td>
-      <td>green</td>
+      <th>C21</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.913383</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.925165</td>
+      <td>1.000000</td>
     </tr>
   </tbody>
 </table>
@@ -16924,18 +15648,41 @@ INFO: 2023-05-30 23:33:00,018: lazy: Loading Foo
 </div>
 
 </div></section></section><section ><section >
-<div id="cell-id=99e8fe89-35fe-4185-a7f9-c42a73a677ef" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=a620df36-6881-4cb7-bd08-bd25bb7e4662" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Unavailable-Datasets">Unavailable Datasets<a class="anchor-link" href="#Unavailable-Datasets">&#182;</a></h2><p>Resolving project data requirements based on references to catalogized schemas might be unsuccessful if the runtime platform can't provide the particular dataset:</p>
+<h3 id="Removing-the-Redundant-Features">Removing the Redundant Features<a class="anchor-link" href="#Removing-the-Redundant-Features">&#182;</a></h3><p>We see strong correlations between the following features:</p>
+<ul>
+<li><code>device_type</code> and <code>C1</code></li>
+<li><code>site_domain</code> and <code>site_id</code></li>
+<li><code>C14</code> and <code>C17</code> and <code>C21</code></li>
+<li><code>C15</code> and <code>C16</code></li>
+</ul>
+<p>Let's update our <a href="forml-solution-avazuctr/avazuctr/source.py">avazuctr/source.py</a> and <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> to keep only the first feature from each of the sets:</p>
+<h4 id="Updating-source.py">Updating source.py<a class="anchor-link" href="#Updating-source.py">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=855a0e1d-70d2-484e-a3b4-2479a4c20a82" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/avazuctr/source.py">avazuctr/source.py</a> component.</li>
+<li>Edit the <code>FEATURES</code> sequence to remove the <code>device_type</code>, <code>site_domain</code>, <code>C15</code>, <code>C17</code>, and <code>C21</code> features.</li>
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/avazuctr/source.py">avazuctr/source.py</a> FILE!</strong></li>
+</ol>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=2ae1ff8f-54e0-49d3-aa8f-2703b3d97bdb" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=fbd23c6d-5711-4bb3-8e73-9206108643e3" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16943,12 +15690,67 @@ INFO: 2023-05-30 23:33:00,018: lazy: Loading Foo
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STATEMENT</span> <span class="o">=</span> <span class="n">Baz</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>avazuctr/source.py
+</pre></div>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">project</span><span class="o">.</span><span class="n">Source</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">STATEMENT</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section >
+<div id="cell-id=8ed8cae7-0f32-4d85-86d0-e85bd298c468" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Updating-pipeline.py">Updating pipeline.py<a class="anchor-link" href="#Updating-pipeline.py">&#182;</a></h4><ol>
+<li>Open the <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> component.</li>
+<li>Edit the<code>CATEGORICAL_COLUMNS</code> sequence to remove the <code>device_type</code>, <code>site_domain</code>, <code>C15</code>, <code>C17</code>, and <code>C21</code> features.</li>
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=d94c354f-5233-4fb5-85ce-eebef4689368" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>avazuctr/pipeline.py
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="cell-id=73b71449-3d55-4881-9afa-be9fb1c38e6c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now we can evaluate the impact of this change:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=033a474a-304d-4372-a679-84c7300d8c0f" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>eval
 </pre></div>
 
      </div>
@@ -16968,8 +15770,612 @@ INFO: 2023-05-30 23:33:00,018: lazy: Loading Foo
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>None of the 2 available feeds provide all of the required sources
+<pre>running eval
+0.38607750713914
 </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=d62ec080-014d-4063-8bc9-dd6761f1937e" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="cell-id=4d3e2d13-6b76-4c6b-9750-99c783a67e83" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This even comes with a slightly improved loss!</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div id="cell-id=c00d8def-8cc7-4c1a-afca-f54badad1845" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Releasing-the-New-Model">Releasing the New Model<a class="anchor-link" href="#Releasing-the-New-Model">&#182;</a></h3><p>Incrementing Project Version:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a>.</li>
+<li>Edit the <code>version</code> setting it to <code>0.2</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.2&quot;</span>
+</pre></div>
+<ol start="3">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=d8264d60-8946-4955-8deb-e861c882523d" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="cell-id=a278de15-6c08-498a-af93-7b6d9d270387" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Commit and tag the code:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=8158488a-614d-48a3-bbb7-946d564f2965" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Released 0.2&#39;</span>
+<span class="o">!</span><span class="w"> </span>git<span class="w"> </span>tag<span class="w"> </span><span class="m">0</span>.2
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[main 330b371] Released 0.2
+ 4 files changed, 7 insertions(+), 9 deletions(-)
+ create mode 100644 application.py
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section><section >
+<div id="cell-id=e8a42ccd-c547-4712-b808-bbe669a6e1cb" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Kick off the packaging and model publishing:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=20ca92b5-d048-433e-947f-4b31c56a1c3c" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>release
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>running bdist_4ml
+Collecting category-encoders==2.6.0
+  Using cached category_encoders-2.6.0-py2.py3-none-any.whl (81 kB)
+Collecting forml==0.93
+  Using cached forml-0.93-py3-none-any.whl (283 kB)
+Collecting imbalanced-learn==0.10.1
+  Using cached imbalanced_learn-0.10.1-py3-none-any.whl (226 kB)
+Collecting openschema==0.7
+  Using cached openschema-0.7-py3-none-any.whl (14 kB)
+Collecting pandas==2.0.1
+  Using cached pandas-2.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
+Collecting scikit-learn==1.2.2
+  Using cached scikit_learn-1.2.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.6 MB)
+Collecting numpy&gt;=1.14.0 (from category-encoders==2.6.0)
+  Using cached numpy-1.24.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
+Collecting scipy&gt;=1.0.0 (from category-encoders==2.6.0)
+  Using cached scipy-1.10.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.4 MB)
+Collecting statsmodels&gt;=0.9.0 (from category-encoders==2.6.0)
+  Using cached statsmodels-0.14.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.1 MB)
+Collecting patsy&gt;=0.5.1 (from category-encoders==2.6.0)
+  Using cached patsy-0.5.3-py2.py3-none-any.whl (233 kB)
+Collecting click (from forml==0.93)
+  Using cached click-8.1.3-py3-none-any.whl (96 kB)
+Collecting cloudpickle (from forml==0.93)
+  Using cached cloudpickle-2.2.1-py3-none-any.whl (25 kB)
+Collecting jinja2 (from forml==0.93)
+  Using cached Jinja2-3.1.2-py3-none-any.whl (133 kB)
+Collecting packaging&gt;=20.0 (from forml==0.93)
+  Using cached packaging-23.1-py3-none-any.whl (48 kB)
+Collecting pip (from forml==0.93)
+  Using cached pip-23.1.2-py3-none-any.whl (2.1 MB)
+Collecting setuptools (from forml==0.93)
+  Using cached setuptools-67.8.0-py3-none-any.whl (1.1 MB)
+Collecting toml (from forml==0.93)
+  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Collecting tomli (from forml==0.93)
+  Using cached tomli-2.0.1-py3-none-any.whl (12 kB)
+Collecting joblib&gt;=1.1.1 (from imbalanced-learn==0.10.1)
+  Using cached joblib-1.2.0-py3-none-any.whl (297 kB)
+Collecting threadpoolctl&gt;=2.0.0 (from imbalanced-learn==0.10.1)
+  Using cached threadpoolctl-3.1.0-py3-none-any.whl (14 kB)
+Collecting python-dateutil&gt;=2.8.2 (from pandas==2.0.1)
+  Using cached python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+Collecting pytz&gt;=2020.1 (from pandas==2.0.1)
+  Using cached pytz-2023.3-py2.py3-none-any.whl (502 kB)
+Collecting tzdata&gt;=2022.1 (from pandas==2.0.1)
+  Using cached tzdata-2023.3-py2.py3-none-any.whl (341 kB)
+Collecting six (from patsy&gt;=0.5.1-&gt;category-encoders==2.6.0)
+  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting MarkupSafe&gt;=2.0 (from jinja2-&gt;forml==0.93)
+  Using cached MarkupSafe-2.1.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Installing collected packages: pytz, tzdata, tomli, toml, threadpoolctl, six, setuptools, pip, packaging, numpy, MarkupSafe, joblib, cloudpickle, click, scipy, python-dateutil, patsy, jinja2, scikit-learn, pandas, statsmodels, imbalanced-learn, forml, openschema, category-encoders
+Successfully installed MarkupSafe-2.1.2 category-encoders-2.6.0 click-8.1.3 cloudpickle-2.2.1 forml-0.93 imbalanced-learn-0.10.1 jinja2-3.1.2 joblib-1.2.0 numpy-1.24.3 openschema-0.7 packaging-23.1 pandas-2.0.1 patsy-0.5.3 pip-23.1.2 python-dateutil-2.8.2 pytz-2023.3 scikit-learn-1.2.2 scipy-1.10.1 setuptools-67.8.0 six-1.16.0 statsmodels-0.14.0 threadpoolctl-3.1.0 toml-0.10.2 tomli-2.0.1 tzdata-2023.3
+running upload
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section><section >
+<div id="cell-id=30662368-2235-4380-955b-b430b8e42a6d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We should now see the new release in the registry:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=ab8028b0-f668-4bab-8f25-d3f9e0057e2a" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>forml-solution-avazuctr
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0.1  0.2  
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=9d5d125c-d5d6-4e75-b019-4b954defa663" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Let's train first generation model of this new release:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=3d61518c-cdca-4560-9ff5-2c0df3c183ea" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>train<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="err">\</span>
+     <span class="o">--</span><span class="n">upper</span> <span class="s1">&#39;2014-10-21 03:00:00&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div id="cell-id=8604b67f-f7a8-4591-bf67-8ada1ed5e142" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="m">0</span>.2
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>1  
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section><section ><div id="cell-id=1f95995c-5a4a-4cf0-955d-8418b1dfe4bd" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="err">&#39;</span><span class="o">[{</span><span class="w"> </span><span class="err">\</span>
+    <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-10-21 03:00:00&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;banner_pos&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;site_id&quot;</span><span class="p">:</span> <span class="s2">&quot;887a4754&quot;</span><span class="p">,</span> <span class="s2">&quot;site_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;e3d9ca35&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;site_category&quot;</span><span class="p">:</span> <span class="s2">&quot;50e219e0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;app_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ecad2386&quot;</span><span class="p">,</span> <span class="s2">&quot;app_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;7801e8d9&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;app_category&quot;</span><span class="p">:</span> <span class="s2">&quot;07d7df22&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0e79d423&quot;</span><span class="p">,</span> <span class="s2">&quot;device_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;9f423918&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_model&quot;</span><span class="p">:</span> <span class="s2">&quot;fc10a0d3&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;device_conn_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;C1&quot;</span><span class="p">:</span> <span class="s2">&quot;1002&quot;</span><span class="p">,</span> <span class="s2">&quot;C14&quot;</span><span class="p">:</span> <span class="s2">&quot;22701&quot;</span><span class="p">,</span> <span class="s2">&quot;C15&quot;</span><span class="p">:</span> <span class="s2">&quot;320&quot;</span><span class="p">,</span> <span class="s2">&quot;C16&quot;</span><span class="p">:</span> <span class="s2">&quot;50&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;C17&quot;</span><span class="p">:</span> <span class="s2">&quot;2624&quot;</span><span class="p">,</span> <span class="s2">&quot;C18&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;C19&quot;</span><span class="p">:</span> <span class="s2">&quot;35&quot;</span><span class="p">,</span> <span class="s2">&quot;C20&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;C21&quot;</span><span class="p">:</span> <span class="s2">&quot;221&quot;</span> \
+<span class="p">}]</span><span class="s1">&#39; http://127.0.0.1:8000/forml-solution-avazuctr</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[{&#34;c0&#34;:0.2057745536}]</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=18662c2a-e3bc-4d63-b3f1-510dc02fbbda" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="err">\</span>
+    <span class="o">--</span><span class="n">lower</span> <span class="s1">&#39;2014-10-21 03:00:00&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0.3866724370765236
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div id="cell-id=ee195a6a-766a-42e1-9282-227f5f97d9cd" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="A/B-Testing-Multiple-Models">A/B Testing Multiple Models<a class="anchor-link" href="#A/B-Testing-Multiple-Models">&#182;</a></h2><p>Since we now have multiple model instances in our registry, we might want to change the selection strategy from the default <em>latest</em> to for example A/B testing. It takes only slight tweaking of the application descriptor.</p>
+<p>Let's change the strategy so that the models get selected according to the following plan (<code>target</code> is the weight this model should end up being selected with):</p>
+<table>
+<thead>
+<tr>
+  <th>Release</th>
+  <th>Generation</th>
+  <th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>0.1</code></td>
+  <td><code>1</code></td>
+  <td>3</td>
+</tr>
+<tr>
+  <td><code>0.1</code></td>
+  <td><code>2</code></td>
+  <td>5</td>
+</tr>
+<tr>
+  <td><code>0.2</code></td>
+  <td><code>1</code></td>
+  <td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=81f02712-18df-4f43-969d-0b4fd5879da8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now, add the generic application descriptor code to the <a href="forml-solution-avazuctr/application.py">application.py</a>:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/application.py">application.py</a> component.</li>
+<li>Update it with the following code defining the <code>ABTest</code> selector strategy:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">application</span>
+
+<span class="n">selector</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">application</span><span class="o">.</span><span class="n">ABTest</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span>
+        <span class="n">project</span><span class="o">=</span><span class="s2">&quot;forml-solution-avazuctr&quot;</span><span class="p">,</span>
+        <span class="n">release</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="p">,</span>
+        <span class="n">generation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">target</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                                    <span class="c1"># variant A 30%</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">generation</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>                    <span class="c1"># variant B 50%</span>
+    <span class="o">.</span><span class="n">against</span><span class="p">(</span><span class="n">release</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span><span class="p">,</span> <span class="n">generation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># variant C 20%</span>
+<span class="p">)</span>
+
+<span class="n">application</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">application</span><span class="o">.</span><span class="n">Generic</span><span class="p">(</span><span class="s2">&quot;forml-solution-avazuctr&quot;</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+<ol start="3">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/application.py">application.py</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=b37efd74-2ec5-465f-9276-56b7e4591d58" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>application.py
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section >
+<div id="cell-id=ed138fca-7928-4e93-a05d-4c6bf091b775" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Redeploying-the-Application">Redeploying the Application<a class="anchor-link" href="#Redeploying-the-Application">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div id="cell-id=aae6263d-c8da-491e-bab1-b91b26447edc" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>application<span class="w"> </span>put<span class="w"> </span>application.py
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="cell-id=11b5ca5e-788d-4478-9194-414327d9f59a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote>
+<p><strong>!Restart the serving gateway!</strong></p>
+</blockquote>
+<p>Make a few requests and watch the <code>x-forml-instance</code> header showing the model:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=3e58a272-021f-4998-815f-1e6d478e5546" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-v<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="err">&#39;</span><span class="o">[{</span><span class="w"> </span><span class="err">\</span>
+    <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-10-21 03:00:00&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;banner_pos&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;site_id&quot;</span><span class="p">:</span> <span class="s2">&quot;887a4754&quot;</span><span class="p">,</span> <span class="s2">&quot;site_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;e3d9ca35&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;site_category&quot;</span><span class="p">:</span> <span class="s2">&quot;50e219e0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;app_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ecad2386&quot;</span><span class="p">,</span> <span class="s2">&quot;app_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;7801e8d9&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;app_category&quot;</span><span class="p">:</span> <span class="s2">&quot;07d7df22&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0e79d423&quot;</span><span class="p">,</span> <span class="s2">&quot;device_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;9f423918&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_model&quot;</span><span class="p">:</span> <span class="s2">&quot;fc10a0d3&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;device_conn_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;C1&quot;</span><span class="p">:</span> <span class="s2">&quot;1002&quot;</span><span class="p">,</span> <span class="s2">&quot;C14&quot;</span><span class="p">:</span> <span class="s2">&quot;22701&quot;</span><span class="p">,</span> <span class="s2">&quot;C15&quot;</span><span class="p">:</span> <span class="s2">&quot;320&quot;</span><span class="p">,</span> <span class="s2">&quot;C16&quot;</span><span class="p">:</span> <span class="s2">&quot;50&quot;</span><span class="p">,</span> \
+    <span class="s2">&quot;C17&quot;</span><span class="p">:</span> <span class="s2">&quot;2624&quot;</span><span class="p">,</span> <span class="s2">&quot;C18&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;C19&quot;</span><span class="p">:</span> <span class="s2">&quot;35&quot;</span><span class="p">,</span> <span class="s2">&quot;C20&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;C21&quot;</span><span class="p">:</span> <span class="s2">&quot;221&quot;</span> \
+<span class="p">}]</span><span class="s1">&#39; http://127.0.0.1:8000/forml-solution-avazuctr </span><span class="se">\</span>
+<span class="s1">    2&gt; &gt;(grep x-forml-instance)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>&lt; x-forml-instance: dispatch-registry-forml-solution-avazuctr-0.1-2
+[{&#34;c0&#34;:0.1364936214}]</pre>
 </div>
 </div>
 

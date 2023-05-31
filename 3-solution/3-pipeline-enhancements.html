@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>4-release-and-deployment slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>3-pipeline-enhancements slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -15166,31 +15166,104 @@ div.jp-OutputPrompt {
 
 <div class="reveal">
 <div class="slides"><section ><section >
-<div id="cell-id=dea615fc-87f9-489b-a23d-5d77fa52c6c1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=eb9cce1c-d0e2-4d91-b9c8-bf1f6da9c07a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Release-and-Deployment">Release and Deployment<a class="anchor-link" href="#Release-and-Deployment">&#182;</a></h1><p>After stepping through these development iterations and achieving <strong>sufficient performance</strong> and successful <strong>test results</strong>, we can proceed to releasing the particular version of the solution model and deploying it for inferrence.</p>
+<h1 id="Pipeline-Enhancements">Pipeline Enhancements<a class="anchor-link" href="#Pipeline-Enhancements">&#182;</a></h1><p>Let's go through one more development iteration...</p>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=26e6ccf2-7369-4aaf-b337-92abb2b6d4a4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Model-Ensembling">Model Ensembling<a class="anchor-link" href="#Model-Ensembling">&#182;</a></h2><p>Instead of just the plain <code>LogisticRegression</code> used in our base model pipeline, we can combine multiple different classifiers using the <a href="https://towardsdatascience.com/stacked-ensembles-improving-model-performance-on-a-higher-level-99ffc4ea5523">stacked ensembling</a> technique to further improve the performance. ForML already <a href="https://docs.forml.io/en/latest/_auto/forml.pipeline.ensemble.html">comes with one possible operator</a> implementing this concept so let's try to use it.</p>
 
 </div>
 </div>
 </div>
 </div></section></section><section ><section >
-<div id="cell-id=2dcaadec-f846-4f2e-8844-27d219914484" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=bfdeb0f0-567a-4b5c-943e-03a059ce5363" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Releasing">Releasing<a class="anchor-link" href="#Releasing">&#182;</a></h2><p>Let's release the first version of our model. As per the <code>version</code> field in the <a href="forml-solution-avazuctr">pyproject.toml</a>, the version number is going to be <code>0.1</code>.</p>
-<p>Following the best practices, we first commit all the recent changes and tag it with the version number:</p>
+<h3 id="Adding-the-Ensemble">Adding the Ensemble<a class="anchor-link" href="#Adding-the-Ensemble">&#182;</a></h3><p>Add a basic model ensemble of <strong>two classifiers</strong> with just <strong>two-fold crossvalidation</strong> to the <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a>:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> component.</li>
+<li>Add all the required imports:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">model_selection</span>
+
+<span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
+<span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">ensemble</span><span class="p">,</span> <span class="n">wrap</span>
+
+<span class="k">with</span> <span class="n">wrap</span><span class="o">.</span><span class="n">importer</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">category_encoders</span> <span class="kn">import</span> <span class="n">TargetEncoder</span>
+    <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
+    <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+</pre></div>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=27f6c2f3-cf10-49d6-a20b-93d6a5a58d9e" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section >
+<div id="cell-id=102e7970-7c0b-4374-aad5-8a2c0b22c037" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="3">
+<li>Update it with the code below using the ensemble of <code>GradientBoostingClasifier</code> and <code>RandomForestClassifier</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">CATEGORICAL_COLUMNS</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># Keep original</span>
+
+<span class="n">STACK</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">FullStack</span><span class="p">(</span>
+    <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="n">crossvalidator</span><span class="o">=</span><span class="n">model_selection</span><span class="o">.</span><span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">PIPELINE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">TargetEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="n">CATEGORICAL_COLUMNS</span><span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+    <span class="o">&gt;&gt;</span> <span class="n">STACK</span>
+    <span class="o">&gt;&gt;</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Registering the pipeline</span>
+<span class="n">project</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span>
+</pre></div>
+<ol start="4">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=0ac9cf02-d5ba-4576-a5fe-186058176e46" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Evaluating-the-Change">Evaluating the Change<a class="anchor-link" href="#Evaluating-the-Change">&#182;</a></h3><p>Let's now run the project evaluation to see whether this change was worth it:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=ad7e3c36-7869-4082-997f-4eb25923b24d" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15198,8 +15271,7 @@ div.jp-OutputPrompt {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Released 0.1&quot;</span>
-<span class="o">!</span><span class="w"> </span>git<span class="w"> </span>tag<span class="w"> </span><span class="s2">&quot;v0.1&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>eval
 </pre></div>
 
      </div>
@@ -15219,17 +15291,8 @@ div.jp-OutputPrompt {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[main (root-commit) 096ff6a] Released 0.1
- 9 files changed, 200 insertions(+)
- create mode 100644 .gitignore
- create mode 100644 avazuctr/__init__.py
- create mode 100644 avazuctr/evaluation.py
- create mode 100644 avazuctr/pipeline.py
- create mode 100644 avazuctr/source.py
- create mode 100644 pyproject.toml
- create mode 100644 tests/__init__.py
- create mode 100644 tests/test_pipeline.py
- create mode 100644 tests/test_source.py
+<pre>running eval
+0.3911373233919557
 </pre>
 </div>
 </div>
@@ -15238,19 +15301,19 @@ div.jp-OutputPrompt {
 
 </div>
 
-</div></section><section >
-<div id="cell-id=3fe492be-1ee0-4320-a93e-3aa136d92c0c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=3e705b78-7842-44af-ac85-f5096c1f5168" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Packaging-&amp;-Publishing">Packaging &amp; Publishing<a class="anchor-link" href="#Packaging-&amp;-Publishing">&#182;</a></h3><p>Now we can trigger the actual packaging of the artifact and publishing it to model registry:</p>
+<p>Excellent, this is an improvement!</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=8677f9e0-f8a9-482b-9bb5-34a63bb8cb89" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=b84c64dd-468a-4a19-b891-b5f6a77c0a40" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15258,7 +15321,7 @@ div.jp-OutputPrompt {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>release
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>avazuctr/pipeline.py
 </pre></div>
 
      </div>
@@ -15266,97 +15329,19 @@ div.jp-OutputPrompt {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>running bdist_4ml
-Collecting category-encoders==2.6.0
-  Downloading category_encoders-2.6.0-py2.py3-none-any.whl (81 kB)
-     <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">81.2/81.2 kB</span> <span class="ansi-red-fg">910.0 kB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>a <span class="ansi-cyan-fg">0:00:01</span>
-Collecting forml==0.93
-  Using cached forml-0.93-py3-none-any.whl (283 kB)
-Collecting imbalanced-learn==0.10.1
-  Using cached imbalanced_learn-0.10.1-py3-none-any.whl (226 kB)
-Collecting openschema==0.7
-  Downloading openschema-0.7-py3-none-any.whl (14 kB)
-Collecting pandas==2.0.1
-  Downloading pandas-2.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
-     <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">12.3/12.3 MB</span> <span class="ansi-red-fg">869.3 kB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>00:0100:01
-Collecting scikit-learn==1.2.2
-  Using cached scikit_learn-1.2.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.6 MB)
-Collecting numpy&gt;=1.14.0 (from category-encoders==2.6.0)
-  Using cached numpy-1.24.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
-Collecting scipy&gt;=1.0.0 (from category-encoders==2.6.0)
-  Using cached scipy-1.10.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.4 MB)
-Collecting statsmodels&gt;=0.9.0 (from category-encoders==2.6.0)
-  Downloading statsmodels-0.14.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.1 MB)
-     <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">10.1/10.1 MB</span> <span class="ansi-red-fg">880.9 kB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>00:0100:01
-Collecting patsy&gt;=0.5.1 (from category-encoders==2.6.0)
-  Downloading patsy-0.5.3-py2.py3-none-any.whl (233 kB)
-     <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">233.8/233.8 kB</span> <span class="ansi-red-fg">974.1 kB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>a <span class="ansi-cyan-fg">0:00:01</span>
-Collecting click (from forml==0.93)
-  Using cached click-8.1.3-py3-none-any.whl (96 kB)
-Collecting cloudpickle (from forml==0.93)
-  Using cached cloudpickle-2.2.1-py3-none-any.whl (25 kB)
-Collecting jinja2 (from forml==0.93)
-  Using cached Jinja2-3.1.2-py3-none-any.whl (133 kB)
-Collecting packaging&gt;=20.0 (from forml==0.93)
-  Using cached packaging-23.1-py3-none-any.whl (48 kB)
-Collecting pip (from forml==0.93)
-  Using cached pip-23.1.2-py3-none-any.whl (2.1 MB)
-Collecting setuptools (from forml==0.93)
-  Using cached setuptools-67.8.0-py3-none-any.whl (1.1 MB)
-Collecting toml (from forml==0.93)
-  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
-Collecting tomli (from forml==0.93)
-  Using cached tomli-2.0.1-py3-none-any.whl (12 kB)
-Collecting joblib&gt;=1.1.1 (from imbalanced-learn==0.10.1)
-  Using cached joblib-1.2.0-py3-none-any.whl (297 kB)
-Collecting threadpoolctl&gt;=2.0.0 (from imbalanced-learn==0.10.1)
-  Using cached threadpoolctl-3.1.0-py3-none-any.whl (14 kB)
-Collecting python-dateutil&gt;=2.8.2 (from pandas==2.0.1)
-  Using cached python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
-Collecting pytz&gt;=2020.1 (from pandas==2.0.1)
-  Using cached pytz-2023.3-py2.py3-none-any.whl (502 kB)
-Collecting tzdata&gt;=2022.1 (from pandas==2.0.1)
-  Using cached tzdata-2023.3-py2.py3-none-any.whl (341 kB)
-Collecting six (from patsy&gt;=0.5.1-&gt;category-encoders==2.6.0)
-  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
-Collecting MarkupSafe&gt;=2.0 (from jinja2-&gt;forml==0.93)
-  Using cached MarkupSafe-2.1.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
-Installing collected packages: pytz, tzdata, tomli, toml, threadpoolctl, six, setuptools, pip, packaging, numpy, MarkupSafe, joblib, cloudpickle, click, scipy, python-dateutil, patsy, jinja2, scikit-learn, pandas, statsmodels, imbalanced-learn, forml, openschema, category-encoders
-Successfully installed MarkupSafe-2.1.2 category-encoders-2.6.0 click-8.1.3 cloudpickle-2.2.1 forml-0.93 imbalanced-learn-0.10.1 jinja2-3.1.2 joblib-1.2.0 numpy-1.24.3 openschema-0.7 packaging-23.1 pandas-2.0.1 patsy-0.5.3 pip-23.1.2 python-dateutil-2.8.2 pytz-2023.3 scikit-learn-1.2.2 scipy-1.10.1 setuptools-67.8.0 six-1.16.0 statsmodels-0.14.0 threadpoolctl-3.1.0 toml-0.10.2 tomli-2.0.1 tzdata-2023.3
-running upload
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div></section><section >
-<div id="cell-id=20d3e3ef-7dd7-44c9-935f-1d332112d511" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=b11f1cb1-9fad-49d9-99c0-b1cfe74f623e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Browsing-the-Model-Registry">Browsing the Model Registry<a class="anchor-link" href="#Browsing-the-Model-Registry">&#182;</a></h3><p>We should now see the project in the model registry next to the previously published <code>dummy</code>:</p>
+<h3 id="Reviewing-the-Ensembling-Task-Graph">Reviewing the Ensembling Task Graph<a class="anchor-link" href="#Reviewing-the-Ensembling-Task-Graph">&#182;</a></h3><p>Visualizing the ensembling task graph can help to understand the principle:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=53ee141c-533f-44e1-9985-accc9c000bc6" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=80cd280a-f976-4570-883a-23ae11107955" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15364,7 +15349,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>train<span class="w"> </span>-R<span class="w"> </span>graphviz
 </pre></div>
 
      </div>
@@ -15384,7 +15369,7 @@ running upload
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>dummy                    forml-solution-avazuctr  
+<pre>running train
 </pre>
 </div>
 </div>
@@ -15393,7 +15378,67 @@ running upload
 
 </div>
 
-</div><div id="cell-id=693543a0-c6d5-4f46-bfab-42bd66239c46" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div>
+<div id="cell-id=7a7487b1-7093-41cd-8e5f-e054625c9198" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><em>forml-solution-avazuctr/forml.dot.svg</em>:
+<a href="./img/ensembling.svg"><img src="./img/ensembling.svg" alt="Ensembling Task Graph" /></a></p>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div id="cell-id=550e1277-6c00-4b88-bc6d-2beaeb9b5c82" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Balancing-the-Target-Classes">Balancing the Target Classes<a class="anchor-link" href="#Balancing-the-Target-Classes">&#182;</a></h2><p>As noticed during the <a href="1-setup-and-exploration.html">exploration</a>, the target variable is highly imbalanced (417,963 in the negative class vs only 82,037 in the positive). This might be getting the model <a href="https://towardsdatascience.com/how-to-deal-with-imbalanced-data-34ab7db9b100">biased towards the majority class</a>.</p>
+<p>Let's try to use our <a href="../2-tutorial/2-task-dependency-management.html">Balancer implemented previously</a> to see if it brings any improvements.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div id="cell-id=25170140-9dd3-4e96-9bcc-dbc422f50667" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Adding-the-Balancer">Adding the Balancer<a class="anchor-link" href="#Adding-the-Balancer">&#182;</a></h3><p>Edit the <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a> and add the new dependency of <code>imbalanced-learn==0.10.1</code>:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a>.</li>
+<li>Update it with the config below adding the new dependency of <code>imbalanced-learn==0.10.1</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;forml-solution-avazuctr&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.1&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s">&quot;category-encoders==2.6.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;forml==0.93&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;imbalanced-learn==0.10.1 &quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;openschema==0.7&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;pandas==2.0.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;scikit-learn==1.2.2&quot;</span>
+<span class="p">]</span>
+
+<span class="k">[tool.forml]</span>
+<span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;avazuctr&quot;</span>
+</pre></div>
+<ol start="3">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/pyproject.toml">pyproject.toml</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=9e5adb88-e607-48c6-a2f8-02516f0a7a60" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15401,7 +15446,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>forml-solution-avazuctr
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml
 </pre></div>
 
      </div>
@@ -15409,28 +15454,140 @@ running upload
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div></section><section >
+<div id="cell-id=eaf4df1a-03f0-424d-a263-77318e4b6c42" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now, add the <code>Balancer</code> implementation to the <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a>:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> component.</li>
+<li>Add all the required imports:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
 
+<span class="kn">from</span> <span class="nn">imblearn</span> <span class="kn">import</span> <span class="n">over_sampling</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">model_selection</span>
 
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">flow</span><span class="p">,</span> <span class="n">project</span>
+<span class="kn">from</span> <span class="nn">forml.pipeline</span> <span class="kn">import</span> <span class="n">ensemble</span><span class="p">,</span> <span class="n">wrap</span>
 
+<span class="k">with</span> <span class="n">wrap</span><span class="o">.</span><span class="n">importer</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">category_encoders</span> <span class="kn">import</span> <span class="n">TargetEncoder</span>
+    <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
+    <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+</pre></div>
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0.1  
-</pre>
 </div>
 </div>
+</div>
+</div></section><section >
+<div id="cell-id=1945167f-6b2a-41cd-9568-2b6f30631f8a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="2">
+<li>Add the <code>OverSampler</code> actor:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nd">@wrap</span><span class="o">.</span><span class="n">Actor</span><span class="o">.</span><span class="n">apply</span>
+<span class="k">def</span> <span class="nf">OverSampler</span><span class="p">(</span>
+    <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stateless actor with two input and two output ports for oversampling the features/labels of the minor class.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">over_sampling</span><span class="o">.</span><span class="n">RandomOverSampler</span><span class="p">(</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</pre></div>
 
 </div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=b9e238ef-0aeb-4643-a6ef-be63029d8b6c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="3">
+<li>Add the <code>Balancer</code> operator implementation:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Balancer</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">Operator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Balancer operator inserting the provided sampler into the ``train`` &amp; ``label`` paths.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sampler</span><span class="p">:</span> <span class="n">flow</span><span class="o">.</span><span class="n">Builder</span> <span class="o">=</span> <span class="n">OverSampler</span><span class="o">.</span><span class="n">builder</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sampler</span> <span class="o">=</span> <span class="n">sampler</span>
+
+    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">flow</span><span class="o">.</span><span class="n">Composable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">flow</span><span class="o">.</span><span class="n">Trunk</span><span class="p">:</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">scope</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">Worker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sampler</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">sampler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">left</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">publisher</span><span class="p">)</span>
+        <span class="n">new_features</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
+        <span class="n">new_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">sampler</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">sampler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">left</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">publisher</span><span class="p">)</span>
+        <span class="n">new_labels</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
+        <span class="n">new_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">sampler</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">left</span><span class="o">.</span><span class="n">use</span><span class="p">(</span>
+            <span class="n">train</span><span class="o">=</span><span class="n">left</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">new_features</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">left</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="n">new_labels</span><span class="p">),</span>
+        <span class="p">)</span>
+</pre></div>
 
 </div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=fca5ec06-1168-4569-a02c-d6fdd3a1987f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="4">
+<li>Insert the <code>Balancer</code> into the operator right after the <code>TargetEncoder</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">CATEGORICAL_COLUMNS</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Keep original</span>
+<span class="n">STACK</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Keep original</span>
 
-</div><div id="cell-id=5faa8491-5718-47e5-9665-ce63366b8031" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<span class="n">PIPELINE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">TargetEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="n">CATEGORICAL_COLUMNS</span><span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="n">Balancer</span><span class="p">()</span>    <span class="c1"># Inserting the Balancer</span>
+    <span class="o">&gt;&gt;</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+    <span class="o">&gt;&gt;</span> <span class="n">STACK</span>
+    <span class="o">&gt;&gt;</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Registering the pipeline</span>
+<span class="n">project</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">PIPELINE</span><span class="p">)</span>
+</pre></div>
+<ol start="5">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/avazuctr/pipeline.py">avazuctr/pipeline.py</a> FILE!</strong></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=17f2c12e-044f-45f9-8a8e-8916d02c5073" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Evaluating-the-Change">Evaluating the Change<a class="anchor-link" href="#Evaluating-the-Change">&#182;</a></h3><p>Let's quickly confirm the data is now balanced:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=6985acf8-7948-48ff-90a7-03cdfe0cd24f" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15438,7 +15595,12 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="m">0</span>.1
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">project</span>
+<span class="kn">from</span> <span class="nn">avazuctr</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="n">PROJECT</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">&quot;avazuctr&quot;</span><span class="p">)</span>
+<span class="n">PROJECT</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+    <span class="n">pipeline</span><span class="o">.</span><span class="n">Balancer</span><span class="p">()</span>
+<span class="p">)</span><span class="o">.</span><span class="n">launcher</span><span class="o">.</span><span class="n">train</span><span class="p">()</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -15446,19 +15608,45 @@ running upload
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div id="cell-id=31201201-2057-4782-83d5-12d769be4ff2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>click
+0    417919
+1    417919
+Name: count, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=84adc893-2398-4d7f-b0c0-be83f9aedbe0" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The release <code>0.1</code> is now in the model registry but it has no trained <em>generations</em> yet.</p>
+<p>Good, let's kick off the evaluation:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=7b44fdc3-d1ae-4037-86c2-d6b63eb58e1c" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=42fe3777-6efc-46ee-a9c3-d84241b1e022" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15466,7 +15654,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>tree<span class="w"> </span>/opt/forml/assets/registry/forml-solution-avazuctr
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>eval
 </pre></div>
 
      </div>
@@ -15486,11 +15674,8 @@ running upload
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre><span class="ansi-blue-intense-fg ansi-bold">/opt/forml/assets/registry/forml-solution-avazuctr</span>
-└── <span class="ansi-blue-intense-fg ansi-bold">0.1</span>
-    └── package.4ml
-
-1 directory, 1 file
+<pre>running eval
+0.38634029551291765
 </pre>
 </div>
 </div>
@@ -15499,19 +15684,19 @@ running upload
 
 </div>
 
-</div></section><section >
-<div id="cell-id=ed046925-cfa3-4fc0-b402-9e5a5f911cb5" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=b200fbc8-ac77-4f5e-a7a1-ab924bc60b9f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Training">Training<a class="anchor-link" href="#Training">&#182;</a></h3><p>Let's pretend the current time is <code>2014-10-21 03:00:00</code> and train a model with data up to that <em>now</em> point:</p>
+<p>That's another improvement!</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=49bdce5f-c022-4e88-81c1-e150e1a9643b" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=70856fc1-209d-4832-a830-fed010ffb168" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15519,8 +15704,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>train<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="err">\</span>
-    <span class="o">--</span><span class="n">upper</span> <span class="s1">&#39;2014-10-21 03:00:00&#39;</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>avazuctr/pipeline.py
 </pre></div>
 
      </div>
@@ -15528,7 +15712,19 @@ running upload
 </div>
 </div>
 
-</div><div id="cell-id=ec28ed64-4382-41e5-bb1f-adbdfcba2f56" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section >
+<div id="cell-id=d30d64cc-4529-4866-945d-7f2894fae435" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Reviewing-the-Final-Task-Graph">Reviewing the Final Task Graph<a class="anchor-link" href="#Reviewing-the-Final-Task-Graph">&#182;</a></h3><p>To visualize the the final task graph:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=df1aa4ef-c64e-412f-96ba-00e742553c76" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15536,7 +15732,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>list<span class="w"> </span>forml-solution-avazuctr<span class="w"> </span><span class="m">0</span>.1
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span>train<span class="w"> </span>-R<span class="w"> </span>graphviz
 </pre></div>
 
      </div>
@@ -15556,7 +15752,7 @@ running upload
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>1  
+<pre>running train
 </pre>
 </div>
 </div>
@@ -15565,7 +15761,32 @@ running upload
 
 </div>
 
-</div><div id="cell-id=4c8c11a4-13a3-4eec-a405-343bfa9d2baa" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div>
+<div id="cell-id=81b2532f-b63b-4034-8552-2ae34f7650c1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><em>forml-solution-avazuctr/forml.dot.svg</em>:
+<a href="img/enhanced.svg"><img src="img/enhanced.svg" alt="Final Task Graph" /></a></p>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div id="cell-id=897237cb-7ba7-479d-a43d-f70d5337ac43" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Adding-the-Balancer-Unit-Test">Adding the Balancer Unit Test<a class="anchor-link" href="#Adding-the-Balancer-Unit-Test">&#182;</a></h3><p>Let's also add the <a href="../2-tutorial/2-task-dependency-management.html">Balancer unit test implemented previously</a> to the project tests:</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=db0fbbea-c0cc-4515-8915-879598ef6b62" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15573,7 +15794,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>tree<span class="w"> </span>/opt/forml/assets/registry/forml-solution-avazuctr
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>touch<span class="w"> </span>tests/test_pipeline.py
 </pre></div>
 
      </div>
@@ -15581,56 +15802,38 @@ running upload
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre><span class="ansi-blue-intense-fg ansi-bold">/opt/forml/assets/registry/forml-solution-avazuctr</span>
-└── <span class="ansi-blue-intense-fg ansi-bold">0.1</span>
-    ├── <span class="ansi-blue-intense-fg ansi-bold">1</span>
-    │   ├── 0444977f-94e0-41af-95cc-bc73c7d4190e.bin
-    │   ├── 13459cdb-6c85-4899-a516-f814d5b2bda2.bin
-    │   ├── 32e05554-5eed-44dd-b53d-23b8807562a3.bin
-    │   ├── 38442d05-75ce-4a00-954e-aef27cacd4e7.bin
-    │   ├── 4cb2c4c6-7cd2-47b6-a37d-daf15119e46f.bin
-    │   ├── 66ab3016-2baa-4864-915f-13ab9163ce60.bin
-    │   ├── 83ed1abf-4086-4d05-9ad4-4e9f086c5d68.bin
-    │   ├── 8b94be64-ea35-4642-b26a-f98a6317be20.bin
-    │   ├── 8c736b7e-6fc6-4918-815a-4badc0d63af8.bin
-    │   └── tag.toml
-    └── package.4ml
-
-2 directories, 11 files
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section >
-<div id="cell-id=563c5a14-c0ff-430e-ad0b-f6014fabe663" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=2ce72726-7689-46c7-bdcc-951b0a0e87be" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Deployment-&amp;-Serving">Deployment &amp; Serving<a class="anchor-link" href="#Deployment-&amp;-Serving">&#182;</a></h2><p>Serving our published model means exposing its task graph in the <em>apply mode</em> for prediction requests.</p>
-<p>To quickly remind ourselves what this task graph looks like:</p>
+<p>Edit the created <a href="forml-solution-avazuctr/tests/test_pipeline.py">test_pipeline.py</a> and implement the unit test:</p>
+<ol>
+<li>Open the <a href="forml-solution-avazuctr/tests/test_pipeline.py">test_pipeline.py</a>.</li>
+<li>Update it with the code below providing the <code>TestBalancer</code> unit test implementation:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">testing</span>
+<span class="kn">from</span> <span class="nn">avazuctr</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="k">class</span> <span class="nc">TestBalancer</span><span class="p">(</span><span class="n">testing</span><span class="o">.</span><span class="n">operator</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">Balancer</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Balancer unit tests.&quot;&quot;&quot;</span>
+
+    <span class="n">default_oversample</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">testing</span><span class="o">.</span><span class="n">Case</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">train</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="o">.</span><span class="n">returns</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="p">)</span>
+</pre></div>
+<ol start="3">
+<li><strong>SAVE THE <a href="forml-solution-avazuctr/tests/test_pipeline.py">test_pipeline.py</a> FILE!</strong></li>
+</ol>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=f8ff28a1-feaa-4d13-8dcb-c0ba82dcfb5d" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=57e23609-4c65-4d54-b6c8-3635c1d9175f" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15638,7 +15841,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>model<span class="w"> </span>-R<span class="w"> </span>graphviz<span class="w"> </span>apply<span class="w"> </span>forml-solution-avazuctr
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>tests/test_pipeline.py
 </pre></div>
 
      </div>
@@ -15646,36 +15849,19 @@ running upload
 </div>
 </div>
 
-</div>
-<div id="cell-id=7580ca6b-6389-4632-b88b-84351120ff30" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><em>forml-solution-avazuctr/forml.dot.svg</em>:
-<a href="img/apply.svg"><img src="img/apply.svg" alt="Apply Task Graph" /></a></p>
-
-</div>
-</div>
-</div>
 </div></section><section >
-<div id="cell-id=ed60bad8-5668-426a-9f15-82196d3d49c3" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=b72d0887-a879-412b-be8b-e4fca12a92ea" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Serving-Gateways">Serving Gateways<a class="anchor-link" href="#Serving-Gateways">&#182;</a></h3><p>On top of the published models, ForML adds additional layer for controlling all sorts of model serving aspects. This brings forth the concept of <a href="https://docs.forml.io/en/latest/application.html">applications</a> and <a href="https://docs.forml.io/en/latest/serving.html">serving gateways</a>.</p>
-<p>Let's start the default serving gateway. Since it is a server process, launch it in a <strong>separate terminal</strong> using the following command:</p>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>forml<span class="w"> </span>application<span class="w"> </span>serve
-</pre></div>
-<p>We can now issue a request to the gateway targetting the (not-yet-deployed) app <code>forml-solution-avazuctr</code>:</p>
+<p>Let's trigger the project tests:</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=2d926050-4b2f-4c08-9c69-990255146c2b" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=5e458ba1-ffe8-4b1a-ac6d-8878257dc56e" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15683,7 +15869,7 @@ running upload
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/forml-solution-avazuctr
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>project<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span>
 </pre></div>
 
      </div>
@@ -15703,202 +15889,27 @@ running upload
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Application forml-solution-avazuctr not found in Dispatch-registry</pre>
-</div>
-</div>
+<pre>    result = self.execute(*args)
+  File &#34;/usr/local/lib/python3.10/site-packages/forml/flow/_code/target/user.py&#34;, line 196, in execute
+    return self.action(self.builder(), *args)
+  File &#34;/usr/local/lib/python3.10/site-packages/forml/flow/_code/target/user.py&#34;, line 150, in __call__
+    result = actor.apply(*args)
+  File &#34;/usr/local/lib/python3.10/site-packages/forml/pipeline/wrap/_actor.py&#34;, line 166, in apply
+    return self.Apply(*features, **self._kwargs)
+  File &#34;/opt/forml/workspace/3-solution/forml-solution-avazuctr/avazuctr/source.py&#34;, line 11, in TimeExtractor
+    assert &#34;hour&#34; in features.columns, &#34;Missing column: hour&#34;
+AssertionError: Missing column: hour
+ok
+test_valid_extraction (tests.test_source.TestTimeExtractor)
+Test of Valid Extraction ... ok
+test_default_oversample (tests.test_pipeline.TestBalancer)
+Test of Default Oversample ... ok
 
-</div>
+----------------------------------------------------------------------
+Ran 3 tests in 5.571s
 
-</div>
-
-</div>
-<div id="cell-id=af9ec840-c21e-4746-afa0-c74656464932" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As expected, this results in <code>404</code> until the application is actually deployed.</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=8c419d27-a5e0-40ec-a0a0-a9f31897361a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Application">Application<a class="anchor-link" href="#Application">&#182;</a></h3><p>Applications are defined through an <em>application descriptor</em> responsible for:</p>
-<ul>
-<li><strong>decoding and extracting</strong> the prediction request</li>
-<li><strong>selecting a model</strong> for serving the prediction request</li>
-<li><strong>assembling and encoding</strong> the prediction response</li>
-</ul>
-<p>Let's implement a simple application descriptor for our scenario:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=3a45afaf-f342-464f-89b4-d8eeb8c825f1" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>touch<span class="w"> </span>application.py
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div id="cell-id=475746e5-5d54-416e-a4b8-65e43387789c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now, add the generic application descriptor code to the <a href="forml-solution-avazuctr/application.py">application.py</a>:</p>
-<ol>
-<li>Open the <a href="forml-solution-avazuctr/application.py">application.py</a> component.</li>
-<li>Update it with the code below registering the generic application descriptor:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">forml</span> <span class="kn">import</span> <span class="n">application</span>
-
-<span class="n">application</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">application</span><span class="o">.</span><span class="n">Generic</span><span class="p">(</span><span class="s1">&#39;forml-solution-avazuctr&#39;</span><span class="p">))</span>
-</pre></div>
-<ol start="3">
-<li><strong>SAVE THE <a href="forml-solution-avazuctr/application.py">application.py</a> FILE!</strong></li>
-</ol>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=fa2a3afb-18ba-4a3d-ae2b-d9439cab6a5c" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>application.py
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section><section >
-<div id="cell-id=72d2dc28-2f27-439e-ad8e-e6d2cafa84ab" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The application gets deployed by pushing its descriptor to application inventory:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=de3d2ac6-6893-4c58-8ccf-ed195307f453" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>application<span class="w"> </span>put<span class="w"> </span>application.py
-<span class="o">!</span><span class="w"> </span>forml<span class="w"> </span>application<span class="w"> </span>list
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forml-solution-avazuctr  
+OK
 </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div id="cell-id=3242f9e9-07b4-4b9e-b50a-26731cd26680" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now we can issue a prediction request:</p>
-
-</div>
-</div>
-</div>
-</div><div id="cell-id=3d08d84b-3783-4a7e-b8d3-9a293235854a" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="err">&#39;</span><span class="o">[{</span><span class="w"> </span><span class="err">\</span>
-    <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-10-21 03:00:00&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;banner_pos&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;site_id&quot;</span><span class="p">:</span> <span class="s2">&quot;887a4754&quot;</span><span class="p">,</span> <span class="s2">&quot;site_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;e3d9ca35&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;site_category&quot;</span><span class="p">:</span> <span class="s2">&quot;50e219e0&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;app_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ecad2386&quot;</span><span class="p">,</span> <span class="s2">&quot;app_domain&quot;</span><span class="p">:</span> <span class="s2">&quot;7801e8d9&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;app_category&quot;</span><span class="p">:</span> <span class="s2">&quot;07d7df22&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0e79d423&quot;</span><span class="p">,</span> <span class="s2">&quot;device_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;9f423918&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;device_model&quot;</span><span class="p">:</span> <span class="s2">&quot;fc10a0d3&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;device_conn_type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;C1&quot;</span><span class="p">:</span> <span class="s2">&quot;1002&quot;</span><span class="p">,</span> <span class="s2">&quot;C14&quot;</span><span class="p">:</span> <span class="s2">&quot;22701&quot;</span><span class="p">,</span> <span class="s2">&quot;C15&quot;</span><span class="p">:</span> <span class="s2">&quot;320&quot;</span><span class="p">,</span> <span class="s2">&quot;C16&quot;</span><span class="p">:</span> <span class="s2">&quot;50&quot;</span><span class="p">,</span> \
-    <span class="s2">&quot;C17&quot;</span><span class="p">:</span> <span class="s2">&quot;2624&quot;</span><span class="p">,</span> <span class="s2">&quot;C18&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;C19&quot;</span><span class="p">:</span> <span class="s2">&quot;35&quot;</span><span class="p">,</span> <span class="s2">&quot;C20&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;C21&quot;</span><span class="p">:</span> <span class="s2">&quot;221&quot;</span> \
-<span class="p">}]</span><span class="s1">&#39; http://127.0.0.1:8000/forml-solution-avazuctr</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[{&#34;c0&#34;:0.1618960089}]</pre>
 </div>
 </div>
 
