@@ -25,42 +25,14 @@ ML solution demonstrating all of these declared principles.
 Setup
 -----
 
-Clone this repository:
-
-    $ git clone git@github.com:formlio/mlprague23.git
-    $ cd mlprague23
-
-
-### Docker
-
-The recommended way to save time during this workshop is to perform all the
-steps in the pre-built Docker container.
-
-1. [Install Docker Engine](https://docs.docker.com/engine/install/) along with
-   the [Docker Compose plugin](https://docs.docker.com/compose/install/).
-2. Spin up the workspace container from within the `mlprague23` project root
-   directory:
-
-       $ docker compose up -d
-
-3. Load the [workspace notebook interface](http://127.0.0.1:8888/lab) using
-   your browser.
-
-
-### From Scratch
-
-The following procedure can be followed to setup the environment without Docker.
-It is, however, not recommended due to the limitted time during the workshop.
-
-1. [Install ForML](https://docs.forml.io/en/latest/install.html) (with at least
-   the `dask`, `graphviz`, `rest`, `spark` and `sql` extras).
-2. [Confgiure your platform](https://docs.forml.io/en/latest/platform.html)
-   based on the [config.toml](config.toml) to replicate the setup used
-   throughout this tutorial.
-3. [Install OpenLake](https://openlake.readthedocs.io/en/latest/install.html)
-   feed (with at least the `kaggle` extras).
-4. Unless pre-existing, [register a Kaggle account](https://www.kaggle.com/)
-   and [setup your API token](https://www.kaggle.com/docs/api) (`kaggle.json`).
-5. [Accept the Avazu dataset terms](https://www.kaggle.com/competitions/avazu-ctr-prediction/data).
-6. [Install and launch](https://jupyter.org/install) JupyterLab to access the
-   notebooks.
+1. Clone the [workshop repository](https://github.com/formlio/mlprague23):
+```shell
+$ git clone git@github.com:formlio/mlprague23.git
+$ cd mlprague23
+```
+2. [Install Docker Engine](https://docs.docker.com/engine/install/) along with the [Docker Compose plugin](https://docs.docker.com/compose/install/) (should be already part of any recent docker engine version).
+3. Spin up the workspace container from within the `mlprague23` project root directory (this will need to bind ports `8888`, `8000` and `4040` on your machine):
+```shell
+$ docker compose up -d
+```
+4. Load the workspace notebook interface at [http://127.0.0.1:8888/lab](http://127.0.0.1:8888/lab) using your browser.
