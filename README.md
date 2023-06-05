@@ -22,8 +22,12 @@ end-to-end ML solution that demonstrates all of these principles we've discussed
 
 Slides
 ------
-The introduction slides are available on [google slides](https://tinyurl.com/5t34erst)
-The workshop slides are available at [formlio.github.io/mlprague23](https://formlio.github.io/mlprague23/).
+* The introduction slides are available on [google slides](https://tinyurl.com/5t34erst)
+* The workshop slides are available at [formlio.github.io/mlprague23](https://formlio.github.io/mlprague23/).
+
+Medium Article
+--------------
+An accompanying article in more depth on the lifecycle patterns can be found on [medium](https://towardsdatascience.com/understanding-ml-product-lifecycle-patterns-a39c18302452)
 
 
 Setup
